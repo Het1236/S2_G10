@@ -1,0 +1,252 @@
+\documentclass[11pt]{article}
+
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{booktabs} % For better looking tables
+\usepackage{xcolor} 
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{CSE 400: Fundamentals of Probability in Computing}
+\rhead{Lecture 3 Scribe}
+\cfoot{\thepage}
+
+\begin{document}
+
+\begin{center}
+    {\Large \textbf{Lecture Scribe}} \\
+    \vspace{0.3cm}
+    \begin{tabular}{rl}
+        \textbf{Course:} & CSE400 – Fundamentals of Probability in Computing \\
+        \textbf{Lecture Number:} & Lecture 3 \\
+        \textbf{Lecture Topic:} & Introduction to Probability Theory \\
+        \textbf{Instructor:} & Dr. Dhaval Patel \\
+        \textbf{Date:} & January 13, 2026 \\
+        \textbf{Audience:} & 2nd Year B.Tech (CSE) \\
+        \textbf{Source:} & Lecture 3 Slides (L3.pdf)
+    \end{tabular}
+\end{center}
+\hrule
+\vspace{0.5cm}
+
+
+\section{Opening Context (as per lecture motivation)}
+The lecture formally introduces probability theory as a mathematical framework to reason about uncertainty, which naturally arises in:
+\begin{itemize}
+    \item Daily-life decision making
+    \item Engineering systems
+    \item Computing systems where outcomes are not deterministic
+\end{itemize}
+The emphasis in this lecture is on:
+\begin{itemize}
+    \item Formal definitions
+    \item Mathematical structure
+    \item Foundations required for later topics (random variables, distributions, algorithms)
+\end{itemize}
+
+\section{Random Experiments}
+
+\subsection{Definition}
+\textbf{Definition (as stated in lecture):} \\
+A random experiment is a process or procedure which, when performed under identical conditions, results in one outcome from a set of possible outcomes, where the exact outcome cannot be predicted with certainty in advance.
+
+\subsection{Key Characteristics}
+\begin{itemize}
+    \item Repeatable under identical conditions
+    \item Outcome is uncertain
+    \item Set of all possible outcomes is known
+\end{itemize}
+
+\subsection{Examples (from lecture discussion)}
+\begin{itemize}
+    \item Tossing a coin
+    \item Rolling a die
+    \item Sending a packet over a noisy communication channel
+    \item Sensor measurement under noise
+\end{itemize}
+
+\section{Sample Space}
+
+\subsection{Definition}
+\textbf{Definition:} \\
+The sample space, denoted by $\Omega$, is the set of all possible outcomes of a random experiment.
+\[ \Omega = \{ \text{all possible outcomes} \} \]
+
+\subsection{Examples}
+\begin{itemize}
+    \item \textbf{Single coin toss:} $\Omega = \{H, T\}$
+    \item \textbf{Rolling a six-sided die:} $\Omega = \{1, 2, 3, 4, 5, 6\}$
+    \item \textbf{Two coin tosses:} $\Omega = \{HH, HT, TH, TT\}$
+\end{itemize}
+
+\section{Events}
+
+\subsection{Definition}
+\textbf{Definition:} \\
+An event is any subset of the sample space $\Omega$.
+\[ A \subseteq \Omega \]
+
+\subsection{Types of Events}
+\begin{itemize}
+    \item \textbf{Simple (Elementary) Event:} Contains exactly one outcome
+    \item \textbf{Compound Event:} Contains more than one outcome
+\end{itemize}
+
+\subsection{Examples}
+Let $\Omega = \{1, 2, 3, 4, 5, 6\}$.
+\begin{itemize}
+    \item Event A = ``Even number occurs'' $\implies A = \{2, 4, 6\}$
+    \item Event B = ``Number greater than 4'' $\implies B = \{5, 6\}$
+\end{itemize}
+
+\section{Set Operations on Events}
+Events follow set-theoretic operations, which are used heavily later in probability derivations.
+
+\subsection{Union}
+\[ A \cup B = \{ \omega : \omega \in A \text{ or } \omega \in B \} \]
+
+\subsection{Intersection}
+\[ A \cap B = \{ \omega : \omega \in A \text{ and } \omega \in B \} \]
+
+\subsection{Complement}
+\[ A^c = \Omega \setminus A \]
+
+\section{Probability Measure}
+
+\subsection{Definition}
+\textbf{Definition (informal, as introduced):} \\
+Probability assigns a numerical value to events indicating how likely they are to occur. \\
+Formally, probability is a function:
+\[ P : F \to [0, 1] \]
+where:
+\begin{itemize}
+    \item $F$ is a collection of events
+    \item $P(A)$ denotes probability of event A
+\end{itemize}
+
+\section{Axioms of Probability (Kolmogorov Axioms)}
+These axioms form the foundation of all probability theory and were explicitly emphasized as non-negotiable assumptions.
+
+\subsection{Axiom 1: Non-negativity}
+For any event A:
+\[ P(A) \ge 0 \]
+
+\subsection{Axiom 2: Normalization}
+\[ P(\Omega) = 1 \]
+\textbf{Interpretation:} Some outcome in $\Omega$ must occur.
+
+\subsection{Axiom 3: Additivity}
+For mutually exclusive events $A_1, A_2, \dots$:
+\[ P\left(\bigcup_i A_i\right) = \sum_i P(A_i) \]
+\textbf{Condition:} $A_i \cap A_j = \emptyset$ for $i \neq j$.
+
+\section{Immediate Consequences of Axioms}
+
+\subsection{Probability of Empty Set}
+\[ P(\emptyset) = 0 \]
+\textbf{Reasoning:}
+\[ \Omega = \Omega \cup \emptyset \implies P(\Omega) = P(\Omega) + P(\emptyset) \implies P(\emptyset) = 0 \]
+
+\subsection{Complement Rule}
+\[ P(A^c) = 1 - P(A) \]
+\textbf{Derivation:}
+\[ A \cup A^c = \Omega, \quad A \cap A^c = \emptyset \]
+Using additivity:
+\[ P(A) + P(A^c) = P(\Omega) = 1 \]
+
+\section{Finite Sample Space with Equally Likely Outcomes}
+
+\subsection{Assumption}
+\begin{itemize}
+    \item Sample space $\Omega$ is finite
+    \item All outcomes are equally likely
+\end{itemize}
+
+\subsection{Probability Formula}
+For event A:
+\[ P(A) = \frac{|A|}{|\Omega|} \]
+where:
+\begin{itemize}
+    \item $|A|$ = number of outcomes in A
+    \item $|\Omega|$ = total number of outcomes
+\end{itemize}
+
+\section{Worked Example (from lecture style)}
+\textbf{Problem:} \\
+A fair die is rolled once. Find the probability of getting a number greater than 3.
+
+\textbf{Step-by-Step Solution:} \\
+\textbf{Step 1: Define sample space}
+\[ \Omega = \{1, 2, 3, 4, 5, 6\} \]
+\textbf{Step 2: Define event}
+\[ A = \{4, 5, 6\} \]
+\textbf{Step 3: Apply formula}
+\[ P(A) = \frac{|A|}{|\Omega|} = \frac{3}{6} = \frac{1}{2} \]
+
+\section{Logical Dependencies (Important for Exams)}
+\begin{enumerate}
+    \item Random experiment $\to$ Sample space
+    \item Sample space $\to$ Events
+    \item Events + axioms $\to$ Probability rules
+    \item All later topics rely on these definitions
+\end{enumerate}
+
+\section{What This Lecture Sets Up}
+This lecture is the foundation for:
+\begin{itemize}
+    \item Conditional probability
+    \item Random variables
+    \item PMF / PDF
+    \item Bayes' theorem
+    \item Randomized algorithms
+\end{itemize}
+Without clear understanding of $\Omega$, events, and axioms, later material becomes mechanical and error-prone.
+
+\section{Summary \& Key Takeaways (as emphasized)}
+\begin{itemize}
+    \item Probability is a mathematical model, not guesswork
+    \item Axioms define what probability must satisfy
+    \item Events are sets, and probability obeys set logic
+    \item Finite, equally-likely model is a special case, not general
+\end{itemize}
+
+\newpage
+\section*{APPENDIX: Quick Reference (Exam-Ready)}
+
+\subsection*{Core Definitions}
+\begin{table}[h!]
+    \centering
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{|l|l|}
+        \hline
+        \textbf{Concept} & \textbf{Definition} \\ \hline
+        Random Experiment & Process with uncertain outcome \\ \hline
+        Sample Space ($\Omega$) & Set of all possible outcomes \\ \hline
+        Event & Subset of $\Omega$ \\ \hline
+        Probability & Function from events to $[0,1]$ \\ \hline
+    \end{tabular}
+\end{table}
+
+\subsection*{Axioms}
+\begin{itemize}
+    \item $P(A) \ge 0$
+    \item $P(\Omega) = 1$
+    \item Additivity for mutually exclusive events
+\end{itemize}
+
+\subsection*{Key Formulas}
+\begin{itemize}
+    \item $P(A^c) = 1 - P(A)$
+    \item $P(A) = |A|/|\Omega|$ (finite, equally likely)
+\end{itemize}
+
+\subsection*{Common Exam Warnings}
+\begin{itemize}
+    \item \textbf{[Warning]} Probability axioms are assumptions, not derived
+    \item \textbf{[Warning]} Events are sets, not outcomes
+    \item \textbf{[Warning]} Equally-likely assumption must be explicitly valid
+\end{itemize}
+
+\end{document}
