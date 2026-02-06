@@ -1,0 +1,235 @@
+\documentclass[11pt]{article}
+
+% ===================== PACKAGES =====================
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{booktabs} % For better looking tables
+\usepackage{xcolor} 
+
+% ===================== HEADER & FOOTER =====================
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{CSE 400: Fundamentals of Probability in Computing}
+\rhead{Lecture 8 Scribe}
+\cfoot{\thepage}
+
+% ===================== DOCUMENT START =====================
+\begin{document}
+
+% --- TITLE BLOCK ---
+\begin{center}
+    {\Large \textbf{Lecture Scribe}} \\
+    \vspace{0.3cm}
+    \begin{tabular}{rl}
+        \textbf{Course:} & CSE400 – Fundamentals of Probability in Computing \\
+        \textbf{Lecture Number:} & Lecture 8 \\
+        \textbf{Lecture Topic:} & Gaussian, Uniform, Exponential, Laplace, and Gamma RVs \\
+        \textbf{Instructor:} & Dhaval Patel, PhD \\
+        \textbf{Date:} & January 29, 2026 \\
+        \textbf{Audience:} & 2nd Year B.Tech (CSE) \\
+        \textbf{Purpose:} & Faithful, exam-ready reconstruction of class content \\
+        \textbf{Source:} & Official lecture slides and board annotations
+    \end{tabular}
+\end{center}
+\hrule
+\vspace{0.5cm}
+
+% ===================== CONTENT =====================
+
+\section{Opening Context (As per Lecture Flow)}
+This lecture continues the discussion on continuous random variables, focusing primarily on the Gaussian (Normal) random variable, followed by examples of other commonly used continuous distributions in computing systems and performance analysis.
+
+\noindent \textbf{Emphasis in lecture:}
+\begin{itemize}
+    \item Mathematical form of PDFs and CDFs
+    \item Use of standard functions ($\Phi$, $Q$, erf) for probability evaluation
+    \item Correct handling of tail probabilities
+    \item Identification of parameters from a given PDF
+\end{itemize}
+
+\section{Preliminaries: Expectation and Moments (Board Recap)}
+
+\subsection{Expected Value of a Function of RV}
+\textbf{For Continuous Random Variable (CRV):}
+\[ E[g(X)] = \int g(x)f_X(x) \, dx \]
+
+\textbf{For Discrete Random Variable (DRV):}
+\[ E[g(X)] = \sum_k g(x_k)P_X(x_k) \]
+
+\subsection{Linearity Properties (Stated in Class)}
+For constants $a, b$:
+\[ E[aX + b] = aE[X] + b \]
+
+For a sum of random variables:
+\[ E\left[\sum_{k=1}^{N} g_k(X)\right] = \sum_{k=1}^{N} E[g_k(X)] \]
+
+\section{Moments of a Random Variable (Board Explanation)}
+
+\subsection{Central Moments}
+\textbf{Second central moment (Variance):}
+\[ \sigma_X^2 = E[(X - \mu_X)^2] \]
+
+\textbf{Third central moment (Skewness):}
+\[ C_s = \frac{E[(X - \mu_X)^3]}{\sigma_X^3} \]
+\textbf{Interpretation (as stated):}
+\begin{itemize}
+    \item Positive $\to$ right-skewed
+    \item Negative $\to$ left-skewed
+    \item Measures symmetry about the mean
+\end{itemize}
+
+\textbf{Fourth central moment (Kurtosis):}
+\[ C_k = \frac{E[(X - \mu_X)^4]}{\sigma_X^4} \]
+\textbf{Interpretation:}
+\begin{itemize}
+    \item Large value $\to$ sharp peak near mean
+\end{itemize}
+
+\section{Gaussian Random Variable}
+
+\subsection{Definition (As Given in Slides)}
+A Gaussian random variable is one whose PDF can be written in the form:
+\[ f_X(x) = \frac{1}{\sqrt{2\pi\sigma^2}} \exp\left( -\frac{(x-\mu)^2}{2\sigma^2} \right) \]
+
+\subsection{Notation}
+\[ X \sim N(\mu, \sigma^2) \]
+Where:
+\begin{itemize}
+    \item $\mu$ = mean
+    \item $\sigma^2$ = variance
+    \item $\sigma$ = standard deviation
+\end{itemize}
+
+\section{Properties of Gaussian RV (From Diagrams and Annotations)}
+\begin{itemize}
+    \item PDF is symmetric about $\mu$
+    \item Total area under PDF = 1
+    \item Mean = Median = Mode = $\mu$
+    \item CDF has S-shape
+    \item Tails extend to $\pm \infty$
+\end{itemize}
+
+\section{Standard Functions for Gaussian Probabilities}
+
+\subsection{Error Function (erf)}
+\[ \text{erf}(x) = \frac{2}{\sqrt{\pi}} \int_{0}^{x} e^{-t^2} \, dt \]
+
+\subsection{Complementary Error Function (erfc)}
+\[ \text{erfc}(x) = 1 - \text{erf}(x) = \frac{2}{\sqrt{\pi}} \int_{x}^{\infty} e^{-t^2} \, dt \]
+
+\section{$\Phi$-Function and Q-Function}
+
+\subsection{$\Phi$-Function (CDF of Standard Normal)}
+\[ \Phi(x) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{x} e^{-t^2/2} \, dt \]
+Represents left-tail probability.
+
+\subsection{Q-Function (Gaussian Tail Function)}
+\[ Q(x) = \frac{1}{\sqrt{2\pi}} \int_{x}^{\infty} e^{-t^2/2} \, dt \]
+Represents right-tail probability.
+
+\subsection{Key Identity (Highlighted in Slides)}
+\[ Q(x) = 1 - \Phi(x) \]
+
+\section{Relation Between $\Phi$ and Q Functions}
+
+\subsection{Evaluating the CDF of a Gaussian RV}
+For $X \sim N(\mu, \sigma^2)$, the step-by-step derivation shown in lecture:
+\[ F_X(x) = \int_{-\infty}^{x} \frac{1}{\sqrt{2\pi\sigma^2}} \exp\left( -\frac{(y-\mu)^2}{2\sigma^2} \right) dy \]
+Substitute $t = \frac{y-\mu}{\sigma}$. Result:
+\[ F_X(x) = \Phi\left( \frac{x-\mu}{\sigma} \right) \]
+
+\subsection{Tail Probability}
+\[ \Pr(X > x) = Q\left( \frac{x-\mu}{\sigma} \right) \]
+
+\subsection{Summary Identities}
+\begin{itemize}
+    \item $Q(x) = 1 - \Phi(x)$
+    \item $F_X(x) = 1 - Q\left( \frac{x-\mu}{\sigma} \right)$
+\end{itemize}
+
+\section{Worked Example (Gaussian RV)}
+
+\subsection{Given PDF (From Slide)}
+\[ f_X(x) = \frac{1}{\sqrt{8\pi}} \exp\left( -\frac{(x+3)^2}{8} \right) \]
+
+\subsection{Parameter Identification}
+Compare with standard Gaussian PDF:
+\[ \frac{1}{\sqrt{2\pi\sigma^2}} \exp\left( -\frac{(x-\mu)^2}{2\sigma^2} \right) \]
+We identify:
+\begin{itemize}
+    \item $\mu = -3$
+    \item $2\sigma^2 = 8 \implies \sigma^2 = 4 \implies \sigma = 2$
+\end{itemize}
+
+\subsection{Probability Calculations (As Solved in Class)}
+\textbf{(1) $\Pr(X \le 0)$}
+\[ \Pr(X \le 0) = F_X(0) = \Phi\left( \frac{0 - (-3)}{2} \right) = \Phi\left( \frac{3}{2} \right) = 1 - Q\left( \frac{3}{2} \right) \]
+
+\textbf{(2) $\Pr(X > 4)$}
+\[ \Pr(X > 4) = Q\left( \frac{4 - (-3)}{2} \right) = Q\left( \frac{7}{2} \right) \]
+
+\section{Other Continuous Random Variables (Mentioned in Lecture)}
+
+\subsection{Uniform Random Variable}
+\begin{itemize}
+    \item Constant PDF over interval
+    \item Used when all outcomes equally likely
+\end{itemize}
+
+\subsection{Exponential Random Variable}
+\begin{itemize}
+    \item Models waiting time
+    \item Memoryless property
+\end{itemize}
+
+\subsection{Laplace Random Variable}
+\begin{itemize}
+    \item Sharp peak at mean
+    \item Heavy tails
+\end{itemize}
+
+\subsection{Gamma Random Variable}
+\begin{itemize}
+    \item Generalization of exponential
+    \item Shape and scale parameters
+    \item Graph and special cases discussed
+    \item (No derivations done in this lecture; examples only.)
+\end{itemize}
+
+\section{In-Class Activity (Mentioned)}
+\textbf{Gaussian Density Estimation}
+\begin{itemize}
+    \item Empirical estimation of PDF
+    \item Comparing histogram with theoretical Gaussian
+\end{itemize}
+
+\section{Summary \& Key Takeaways (Lecture Emphasis)}
+\begin{itemize}
+    \item Gaussian RV is fully described by mean and variance
+    \item $\Phi$-function gives CDF; Q-function gives tail probability
+    \item Standardization simplifies probability evaluation
+    \item Always identify parameters before computing probabilities
+    \item Q-function is more natural for right-tail events
+\end{itemize}
+
+\newpage
+% ===================== APPENDIX =====================
+\section*{APPENDIX A: Quick Reference Sheet}
+
+\subsection*{Core Formulas}
+\begin{table}[h!]
+    \centering
+    \renewcommand{\arraystretch}{2.0} % More vertical space for fractions
+    \begin{tabular}{|l|l|}
+        \hline
+        \textbf{Concept} & \textbf{Formula} \\ \hline
+        Gaussian PDF & $\displaystyle \frac{1}{\sqrt{2\pi\sigma^2}} e^{-(x-\mu)^2/(2\sigma^2)}$ \\ \hline
+        CDF & $\displaystyle F_X(x) = \Phi\left( \frac{x-\mu}{\sigma} \right)$ \\ \hline
+        Right Tail & $\displaystyle \Pr(X > x) = Q\left( \frac{x-\mu}{\sigma} \right)$ \\ \hline
+        Identity & $Q(x) = 1 - \Phi(x)$ \\ \hline
+    \end{tabular}
+\end{table}
+
+\end{document}
