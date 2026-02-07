@@ -1,0 +1,213 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath, amssymb}
+\usepackage{geometry}
+\geometry{margin=1in}
+
+\title{CSE400: Fundamentals of Probability in Computing\\
+Lecture 8: Gaussian, Uniform, Exponential, Laplace, and Gamma Random Variables}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section*{Gaussian Random Variable}
+
+\subsection*{Definition}
+
+A continuous random variable $X$ is said to be a \textbf{Gaussian (Normal) random variable} if its probability density function (PDF) can be written as
+\[
+f_X(x) = \frac{1}{\sqrt{2\pi\sigma^2}} \exp\left(-\frac{(x-m)^2}{2\sigma^2}\right),
+\]
+where
+\[
+m = \mathbb{E}[X], \qquad \sigma^2 = \text{Var}(X).
+\]
+
+Notation:
+\[
+X \sim \mathcal{N}(m,\sigma^2).
+\]
+
+\subsection*{Properties}
+
+\begin{itemize}
+\item PDF is symmetric about $x=m$.
+\item Mean equals median equals mode.
+\item Total area under the PDF equals 1.
+\end{itemize}
+
+\section*{Standard Forms}
+
+\subsection*{Error Function}
+
+\[
+\mathrm{erf}(x) = \frac{2}{\sqrt{\pi}} \int_{0}^{x} e^{-t^2} dt
+\]
+
+\subsection*{Complementary Error Function}
+
+\[
+\mathrm{erfc}(x) = 1 - \mathrm{erf}(x)
+= \frac{2}{\sqrt{\pi}} \int_{x}^{\infty} e^{-t^2} dt
+\]
+
+\subsection*{$\Phi$-Function (CDF of Standard Normal)}
+
+\[
+\Phi(x) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{x} e^{-t^2/2} dt
+\]
+
+\subsection*{$Q$-Function (Gaussian Tail Function)}
+
+\[
+Q(x) = \frac{1}{\sqrt{2\pi}} \int_{x}^{\infty} e^{-t^2/2} dt
+\]
+
+\subsection*{Identity}
+
+\[
+Q(x) = 1 - \Phi(x)
+\]
+
+\section*{Relation Between $\Phi$-Function and $Q$-Function}
+
+\subsection*{Evaluating the CDF}
+
+\[
+F_X(x) = \int_{-\infty}^{x} \frac{1}{\sqrt{2\pi\sigma^2}}
+\exp\left(-\frac{(y-m)^2}{2\sigma^2}\right) dy
+\]
+
+Let
+\[
+t = \frac{y-m}{\sigma}
+\]
+
+Then
+\[
+F_X(x) = \int_{-\infty}^{\frac{x-m}{\sigma}}
+\frac{1}{\sqrt{2\pi}} e^{-t^2/2} dt
+= \Phi\left(\frac{x-m}{\sigma}\right)
+\]
+
+\subsection*{Tail Probability}
+
+\[
+\Pr(X > x) =
+\int_{\frac{x-m}{\sigma}}^{\infty}
+\frac{1}{\sqrt{2\pi}} e^{-t^2/2} dt
+= Q\left(\frac{x-m}{\sigma}\right)
+\]
+
+\subsection*{Key Identities}
+
+\[
+Q(x) = 1 - \Phi(x)
+\]
+\[
+F_X(x) = 1 - Q\left(\frac{x-m}{\sigma}\right)
+\]
+
+\section*{Expectation of a Function of a Random Variable}
+
+\subsection*{Continuous Random Variable}
+
+\[
+\mathbb{E}[g(X)] = \int g(x) f_X(x) \, dx
+\]
+
+\subsection*{Discrete Random Variable}
+
+\[
+\mathbb{E}[g(X)] = \sum_k g(x_k) P_X(x_k)
+\]
+
+\subsection*{Linearity of Expectation}
+
+For constants $a,b$,
+\[
+\mathbb{E}[aX + b] = a\mathbb{E}[X] + b
+\]
+
+For random variables $X_1,\dots,X_N$,
+\[
+\mathbb{E}\left[\sum_{k=1}^{N} g_k(X_k)\right]
+= \sum_{k=1}^{N} \mathbb{E}[g_k(X_k)]
+\]
+
+\section*{Higher-Order Moments}
+
+\subsection*{Second Central Moment}
+
+\[
+\sigma^2 = \mathbb{E}[(X-\mu)^2]
+\]
+
+\subsection*{Skewness}
+
+\[
+C_s = \frac{\mathbb{E}[(X-\mu)^3]}{\sigma^3}
+\]
+
+Measures symmetry about the mean.
+
+\subsection*{Kurtosis}
+
+\[
+C_k = \frac{\mathbb{E}[(X-\mu)^4]}{\sigma^4}
+\]
+
+Large value indicates sharper peak near the mean.
+
+\section*{Example: Gaussian Random Variable}
+
+A random variable $X$ has PDF
+
+\[
+f_X(x) = \frac{1}{\sqrt{8\pi}}
+\exp\left(-\frac{(x+3)^2}{8}\right)
+\]
+
+\subsection*{Identification}
+
+Comparing with
+
+\[
+f_X(x) = \frac{1}{\sqrt{2\pi\sigma^2}}
+\exp\left(-\frac{(x-m)^2}{2\sigma^2}\right)
+\]
+
+we identify
+
+\[
+m=-3, \qquad \sigma^2=4, \qquad \sigma=2
+\]
+
+\subsection*{Gaussian Relations}
+
+\[
+F_X(x) = \Phi\left(\frac{x-m}{\sigma}\right)
+\]
+\[
+\Pr(X>x)=Q\left(\frac{x-m}{\sigma}\right)
+\]
+
+\subsection*{1) $\Pr(X\le 0)$}
+
+\[
+\Pr(X\le0)=F_X(0)
+=\Phi\left(\frac{0-(-3)}{2}\right)
+=\Phi\left(\frac{3}{2}\right)
+=1-Q\left(\frac{3}{2}\right)
+\]
+
+\subsection*{2) $\Pr(X>4)$}
+
+\[
+\Pr(X>4)
+=Q\left(\frac{4-(-3)}{2}\right)
+=Q\left(\frac{7}{2}\right)
+\]
+
+\end{document}
