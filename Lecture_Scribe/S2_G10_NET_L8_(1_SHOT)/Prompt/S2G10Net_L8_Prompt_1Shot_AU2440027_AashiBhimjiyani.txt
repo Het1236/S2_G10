@@ -1,0 +1,103 @@
+Purpose
+
+Prepare a formal lecture scribe using the provided lecture slides. The scribe must serve as exam reference material and contain definitions, notations, assumptions, preliminaries, main results, proofs, conclusions, and worked examples exactly as presented in the lecture slides. Use only the lecture content. Do not add explanations, interpretations, assumptions, or examples not present in the lecture slides.
+
+Example Lecture Scribe (Structure Only)
+
+Topic: Fundamental Properties of Sequences
+
+1) Definitions and Notations
+Definition 1.1 (Sequence)
+
+A sequence is an ordered list of elements indexed by natural numbers.
+
+Notation
+
+Let {a_n},  n = 1,2,3,...
+
+where
+
+a_n = nth element of the sequence
+
+2) Assumptions and Preliminaries
+
+The sequence is defined for all natural numbers.
+
+Each index corresponds to exactly one element.
+
+3) Main Result
+Proof
+a_n = c
+
+where
+
+c = constant
+
+Then
+
+a_1 = c,  a_2 = c,  ... 
+
+
+
+Thus all elements are equal.
+
+Conclusion
+
+A constant sequence has identical values for all indices.
+
+4) Working Examples
+Example 1
+a_n = 5
+
+Then
+
+a_1 = 5,  a_2 = 5
+Instruction 
+
+
+
+Using the exact same structure as the example above, generate a lecture scribe from the provided lecture slides.
+
+Strict Requirements
+
+You MUST follow ALL of these rules:
+
+Use EXACTLY the same structure and section order:
+
+Definitions and Notations
+
+Assumptions and Preliminaries
+
+Main Result
+
+Proof
+
+Conclusion
+
+Working Examples
+
+Use ONLY the content present in the lecture slides.
+
+Do NOT add:
+
+External textbook content
+
+Extra explanations
+
+Additional examples
+
+Interpretations
+
+Assumptions not explicitly stated
+
+If any section is not present in the lecture slides, leave that section blank.
+
+Preserve all mathematical expressions, formulas, definitions, derivations, and examples exactly as presented.
+
+Maintain formal academic tone suitable for exam reference material.
+
+Do NOT include commentary, reasoning, or explanatory text outside the lecture content.
+
+
+
+
