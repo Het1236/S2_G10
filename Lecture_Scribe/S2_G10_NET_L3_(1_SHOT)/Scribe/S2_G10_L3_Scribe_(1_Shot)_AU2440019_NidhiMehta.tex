@@ -1,0 +1,268 @@
+\documentclass[11pt]{article}
+
+\usepackage{amsmath, amssymb}
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{titlesec}
+
+\geometry{margin=1in}
+\setstretch{1.1}
+
+\titleformat{\section}
+  {\normalfont\large\bfseries}{\thesection}{1em}{}
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Header (Matching Sample Formatting)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{center}
+{\large \textbf{CSE 400 : Fundamentals of Probability in Computing}}\\
+\vspace{0.3cm}
+Nidhi Mehta – AU2440019\\
+February 7, 2026
+\end{center}
+
+\vspace{0.3cm}
+
+\noindent
+
+
+\vspace{0.3cm}
+
+
+
+\vspace{0.8cm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Document Content Begins
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{center}
+{\LARGE \textbf{Lecture Scribe}}\\[0.2cm]
+{\large CSE400 – Fundamentals of Probability in Computing}\\
+{\large Lecture 3: Introduction to Probability Theory}
+\end{center}
+
+\vspace{0.8cm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{1. Course Introduction}
+
+\subsection*{1.1 Course Title}
+
+\textbf{CSE400 – Fundamentals of Probability in Computing}
+
+\textbf{Lecture 3: Introduction to Probability Theory}
+
+Instructor Details (as displayed on title slide):
+
+\begin{itemize}
+    \item Dr. Dhaval Patel, PhD
+    \item Associate Professor
+    \item Major Advisor – Computer Science and Engineering (CSE)
+    \item Machine Intelligence, Computing and xG Networks (MICxN) Research Lab
+    \item SEAS – Ahmedabad University, Ahmedabad, Gujarat – India
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{2. Motivational Foundations}
+
+\subsection*{2.1 Quote Slide}
+
+\begin{quote}
+“Good is the enemy of great. That’s why so few things become great.”\\
+— James C. Collins
+\end{quote}
+
+This slide emphasizes striving beyond mediocrity toward excellence.
+
+\subsection*{2.2 Growth Mindset}
+
+\textbf{Growth Mindset:}
+
+\begin{itemize}
+    \item Failure is an opportunity to grow
+    \item I like to try new things
+    \item I can learn to do anything I want
+    \item Challenges help me grow
+    \item My effort and attitude determine my abilities
+    \item Feedback is constructive
+    \item I am inspired by the success of others
+\end{itemize}
+
+\subsection*{2.3 Growth vs Fixed Mindset}
+
+\textbf{Fixed Mindset:}
+
+\begin{itemize}
+    \item Failure is the limit of my abilities
+    \item I’m either good at it or I’m not
+    \item My abilities are unchanging
+    \item I don’t like to be challenged
+    \item My potential is predetermined
+    \item When I’m frustrated, I give up
+    \item I stick to what I know
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{3. Course Outline}
+
+\subsection*{3.1 Outline – Part 1}
+
+\textbf{CSE400: General Course Information}
+
+\begin{itemize}
+    \item Team
+    \item Active Learning Platform: Campuswire
+    \item Schedule
+    \item Grading
+\end{itemize}
+
+\subsection*{3.2 Why Should We Learn CSE400?}
+
+\begin{itemize}
+    \item Example: Daily life conversations
+\end{itemize}
+
+\subsection*{3.3 Engineering Applications}
+
+\begin{itemize}
+    \item Speech Recognition
+    \item System Radar System
+    \item Communication Network
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{4. CSE400: General Course Information}
+
+\subsection*{4.1 Instructor}
+
+\textbf{Dr. Dhaval Patel}
+
+\begin{itemize}
+    \item Role: Instructor
+    \item Place: Faculty Office (Room-210)
+    \item Faculty Profile: \texttt{https://ahduni.edu.in/seas/people/faculty/dhaval-patel}
+    \item Personal Webpage: \texttt{http://profpatel.in/}
+    \item Area of Interest:
+    \begin{itemize}
+        \item xG Networks
+        \item Applied ML
+        \item DL / RL
+        \item AutoML
+        \item Intelligent Transportation Systems
+        \item Life Sciences
+        \item Behaviour Modelling using AI
+    \end{itemize}
+    \item Email: \texttt{dhaval.patel@ahduni.edu.in}
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{5. Active Learning and Class Discussion}
+
+\subsection*{5.1 Course Website}
+
+\begin{itemize}
+    \item Section-1: \texttt{https://campuswire.com/c/G20541104/}
+    \item Section-2: \texttt{https://campuswire.com/c/G766840CE/}
+\end{itemize}
+
+\subsection*{5.2 Why Use Campuswire?}
+
+\begin{enumerate}
+    \item To build confidence level
+    \begin{itemize}
+        \item Participate anonymously
+        \item Post / Back-channel communication during lecture
+    \end{itemize}
+    \item Collaborative and Active Learning
+    \item Real-time feedback and polling
+    \item DM communication with Instructor/TAs
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{6. Schedule}
+
+\subsection*{Lecture Sessions}
+
+\textbf{Section-1}
+\begin{itemize}
+    \item 9:30 AM to 11:00 AM
+    \item Tuesday, Thursday
+    \item GICT Room -136
+\end{itemize}
+
+\textbf{Section-2}
+\begin{itemize}
+    \item 1:00 PM to 2:30 PM
+    \item Tuesday, Thursday
+    \item GICT Room -137
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{7. CSE400 – Project Kickoff (30\%)}
+
+\subsection*{Project Team Formation}
+
+Deadline: \textbf{17th January 2026, Saturday – EOD}
+
+\subsection*{Major Milestones (M1–M6)}
+
+\begin{itemize}
+    \item M1: Kickstart – Team formation, area identification, motivation, problem formulation
+    \item M2: Mathematical Modeling – RV, PMF/PDF, CDF, Joint distributions
+    \item M3: Coding – Simulation + Computation
+    \item M4: Inference – Randomized algorithm
+    \item M5: Randomized Algorithms – Comparison with deterministic algorithm
+    \item M6: Derive bounds, analysis, final submission
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{8. Undergraduate Research Programme (UGRP)}
+
+\subsection*{UGRP-8 (2026–2027)}
+
+\begin{itemize}
+    \item Multidisciplinary
+    \item Experiential Learning
+    \item Research Driven
+    \item 4D Model: Discover, Design, Develop, Deliver
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{9. MICxN Research Lab}
+
+\subsection*{Industry Activities}
+
+\begin{itemize}
+    \item 5G enabled Intelligent Transportation Systems Testbed
+    \item V2X SL communication between OBU and RSU
+    \item ITS Dashboard Development
+\end{itemize}
+
+\subsection*{Research Areas}
+
+\begin{itemize}
+    \item Deep Learning based Crash Prevention
+    \item Deep-RL based Smart Signaling
+    \item mmWave Beam Prediction
+    \item C-V2X and Wi-Fi Coexistence
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{10. Closing}
+
+\begin{center}
+\textbf{Q \& A Session – Open Discussions}
+\end{center}
+
+\vspace{0.5cm}
+
+\noindent
+Thank you!\\
+\texttt{dhaval.patel@ahduni.edu.in}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
