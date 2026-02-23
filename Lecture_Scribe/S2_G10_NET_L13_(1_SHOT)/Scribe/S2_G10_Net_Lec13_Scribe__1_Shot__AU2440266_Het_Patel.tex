@@ -1,0 +1,312 @@
+\documentclass[11pt]{article}
+
+% ===================== PACKAGES =====================
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{booktabs} 
+\usepackage{xcolor} 
+
+% ===================== HEADER & FOOTER =====================
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{CSE 400: Fundamentals of Probability in Computing}
+\rhead{Tutorial-1 Scribe}
+\cfoot{\thepage}
+
+% ===================== DOCUMENT START =====================
+\begin{document}
+
+% --- TITLE BLOCK ---
+\begin{center}
+    {\Large \textbf{Lecture Scribe}} \\
+    \vspace{0.3cm}
+    \begin{tabular}{rl}
+        \textbf{Course:} & CSE 400 – Fundamentals of Probability in Computing \\
+        \textbf{Lecture Type:} & Tutorial Session (Problem Solving) \\
+        \textbf{Topic:} & Tutorial-1 Solutions \\
+        \textbf{Date:} & February 13, 2026 \\
+        \textbf{Scribe:} & Het Patel
+    \end{tabular}
+\end{center}
+\hrule
+\vspace{0.5cm}
+
+% ===================== CONTENT =====================
+
+\section{Opening Context}
+This lecture was a tutorial session in which all assigned problems were solved sequentially. \\
+The focus was:
+\begin{itemize}
+    \item Counting techniques (multinomial coefficients)
+    \item Uniform probability modeling
+    \item Complement rule and De Morgan’s laws
+    \item Poisson distribution
+    \item Conditional probability
+    \item Gaussian distribution and Q-function
+    \item Binomial systems and reliability comparison
+\end{itemize}
+Each question was solved step-by-step during class.
+
+\section{Q1. Division into Platters (Multinomial Counting)}
+
+\subsection{Problem Statement}
+20 distinct dishes are to be divided into 4 groups of 5 dishes each.
+\begin{itemize}
+    \item The order of dishes within groups does not matter.
+    \item The order of groups does not matter.
+\end{itemize}
+
+\subsection{Q1(a) Total Number of Ways}
+\textbf{Assumptions}
+\begin{itemize}
+    \item 20 distinct objects
+    \item Groups are unlabeled
+    \item Each group contains exactly 5 dishes
+    \item Order inside group irrelevant
+\end{itemize}
+
+\textbf{Result Used} \\
+Multinomial coefficient for partitioning into equal groups:
+\[ \frac{20!}{(5!)^4 4!} \]
+
+\textbf{Explanation of Terms}
+\begin{itemize}
+    \item $20!$: Permute all dishes
+    \item $(5!)^4$: Remove ordering inside each group
+    \item $4!$: Remove ordering between groups
+\end{itemize}
+
+\subsection{Q1(b) Probability Each Platter Contains Single Cuisine}
+\textbf{Given}
+\begin{itemize}
+    \item Exactly 5 dishes per cuisine
+    \item 4 cuisines
+    \item Platters unlabeled
+\end{itemize}
+
+\textbf{Key Observation} \\
+Only one arrangement satisfies this condition: Each cuisine forms exactly one platter.
+
+\textbf{Probability}
+\[ P = \frac{1}{\frac{20!}{(5!)^4 4!}} = \frac{(5!)^4 4!}{20!} \]
+
+\section{Q2. Bus Arrival – Uniform Distribution}
+
+\subsection{Model}
+\begin{itemize}
+    \item Passenger arrival time uniformly distributed over 30 minutes (7:00–7:30).
+    \item Buses every 15 minutes $\rightarrow$ at 7:00, 7:15, 7:30.
+\end{itemize}
+
+\subsection{Q2(a) Wait < 5 Minutes}
+Waiting < 5 minutes occurs if arrival is:
+\begin{itemize}
+    \item 7:10–7:15
+    \item 7:25–7:30
+\end{itemize}
+Total favorable time = 10 minutes
+\[ P = \frac{10}{30} = \frac{1}{3} \]
+
+\subsection{Q2(b) Wait > 10 Minutes}
+Arrival intervals:
+\begin{itemize}
+    \item 7:00–7:05
+    \item 7:15–7:20
+\end{itemize}
+Total favorable time = 10 minutes
+\[ P = \frac{10}{30} = \frac{1}{3} \]
+
+\section{Q3. Conditional Probability Using Complements}
+
+\subsection{Given}
+\begin{itemize}
+    \item $P(L) = 0.15$
+    \item $P(E) = 0.25$
+    \item $P(L \cap E) = 0.08$
+\end{itemize}
+Where:
+\begin{itemize}
+    \item $L$: arrives late
+    \item $E$: leaves early
+\end{itemize}
+We need:
+\[ P(L^c \mid E^c) \]
+
+\textbf{Step 1: Compute Complements}
+\[ P(E^c) = 1 - 0.25 = 0.75 \]
+
+\textbf{Step 2: Compute $P(L \cup E)$}
+\begin{align*}
+    P(L \cup E) &= P(L) + P(E) - P(L \cap E) \\
+    &= 0.15 + 0.25 - 0.08 \\
+    &= 0.32
+\end{align*}
+
+\textbf{Step 3: Use De Morgan’s Law}
+\begin{align*}
+    P(L^c \cap E^c) &= 1 - P(L \cup E) \\
+    &= 1 - 0.32 \\
+    &= 0.68
+\end{align*}
+
+\textbf{Step 4: Apply Conditional Probability Definition}
+\begin{align*}
+    P(L^c \mid E^c) &= \frac{P(L^c \cap E^c)}{P(E^c)} \\
+    &= \frac{0.68}{0.75} \\
+    &\approx 0.907
+\end{align*}
+
+\section{Q4. Poisson Distribution ($\lambda = 0.2$)}
+
+\subsection{Model}
+$X \sim \text{Poisson}(\lambda = 0.2)$ \\
+PMF:
+\[ P(X=k) = e^{-\lambda} \frac{\lambda^k}{k!} \]
+
+\subsection{Q4(a) $P(X = 0)$}
+\[ P(0) = e^{-0.2} = 0.8187 \]
+
+\subsection{Q4(b) $P(X \ge 2)$}
+Using complement:
+\begin{align*}
+    P(X \ge 2) &= 1 - P(0) - P(1) \\
+    P(1) &= 0.2 e^{-0.2} = 0.1637 \\
+    P(X \ge 2) &= 1 - 0.8187 - 0.1637 \\
+    &= 0.0176
+\end{align*}
+
+\section{Q5. Poisson ($\lambda = 3.5$)}
+$X \sim \text{Poisson}(3.5)$
+
+\subsection{Q5(a) $P(X \ge 2)$}
+\begin{align*}
+    P(X \ge 2) &= 1 - P(0) - P(1) \\
+    P(0) &= e^{-3.5} = 0.0302 \\
+    P(1) &= 3.5e^{-3.5} = 0.1057 \\
+    P(X \ge 2) &= 1 - 0.0302 - 0.1057 \\
+    &= 0.8641
+\end{align*}
+
+\subsection{Q5(b) $P(X \le 1)$}
+\begin{align*}
+    P(X \le 1) &= P(0) + P(1) \\
+    &= 0.0302 + 0.1057 \\
+    &= 0.1359
+\end{align*}
+
+\section{Q6. Conditional Probability in Poisson ($\lambda = 3$)}
+$X \sim \text{Poisson}(3)$
+
+\subsection{Q6(a) $P(X \ge 3)$}
+\begin{align*}
+    P(X \ge 3) &= 1 - P(0) - P(1) - P(2) \\
+    &= 1 - (0.0498 + 0.1494 + 0.2240) \\
+    &= 0.5768
+\end{align*}
+
+\subsection{Q6(b) $P(X \ge 3 \mid X \ge 1)$}
+Definition:
+\[ P(A \mid B) = \frac{P(A \cap B)}{P(B)} \]
+Since $X \ge 3 \subseteq X \ge 1$:
+\begin{align*}
+    P(X \ge 3 \mid X \ge 1) &= \frac{P(X \ge 3)}{P(X \ge 1)} \\
+    P(X \ge 1) &= 1 - P(0) = 0.9502 \\
+    P(X \ge 3 \mid X \ge 1) &= \frac{0.5768}{0.9502} \approx 0.607
+\end{align*}
+
+\section{Q7. Gaussian Random Variable}
+
+\subsection{Given}
+\[ f_X(x) = \frac{1}{\sqrt{8\pi}} \exp\left(-\frac{(x+3)^2}{8}\right) \]
+
+\subsection{Parameter Identification}
+Comparing with standard Gaussian:
+\begin{itemize}
+    \item $m = -3$
+    \item $\sigma^2 = 4 \implies \sigma = 2$
+\end{itemize}
+
+\subsection{Results}
+\begin{align*}
+    P(X \le 0) &= \Phi(3/2) = 1 - Q(3/2) \\
+    P(X > 4) &= Q(7/2) \\
+    P(|X+3| < 2) &= 1 - 2Q(1) \\
+    P(|X-2| > 1) &= 1 - Q(2) + Q(3)
+\end{align*}
+
+\section{Q8. Jury Decision Problem}
+
+\subsection{Let:}
+\begin{itemize}
+    \item 12 jurors
+    \item Conviction requires $\ge 8$ guilty votes
+    \item Each juror correct with probability $\theta$
+    \item $\alpha$ = probability defendant guilty
+\end{itemize}
+
+\textbf{If Guilty:}
+\[ \sum_{i=8}^{12} \binom{12}{i} \theta^i (1-\theta)^{12-i} \]
+
+\textbf{If Innocent:}
+\[ \sum_{i=5}^{12} \binom{12}{i} \theta^i (1-\theta)^{12-i} \]
+
+\textbf{Final Expression (Conditioning):}
+\[ \alpha \sum_{i=8}^{12} \binom{12}{i} \theta^i (1-\theta)^{12-i} + (1-\alpha) \sum_{i=5}^{12} \binom{12}{i} \theta^i (1-\theta)^{12-i} \]
+
+\section{Q9. Poisson Form Identification}
+
+\subsection{Given}
+\[ p(i) = c \frac{\lambda^i}{i!} \]
+Using:
+\[ \sum_{i=0}^{\infty} \frac{\lambda^i}{i!} = e^\lambda \]
+Thus:
+\[ c e^\lambda = 1 \implies c = e^{-\lambda} \]
+
+\subsection{Results}
+\begin{align*}
+    P(X=0) &= e^{-\lambda} \\
+    P(X>2) &= 1 - e^{-\lambda} - \lambda e^{-\lambda} - \frac{\lambda^2}{2} e^{-\lambda}
+\end{align*}
+
+\section{Q10. System Reliability}
+
+\subsection{Model}
+Number functioning:
+\[ X \sim \text{Binomial}(n,p) \]
+
+\subsection{Q10(a)}
+5-component system better than 3-component system if:
+\[ p > \frac{1}{2} \]
+
+\subsection{Q10(b)}
+General result: \\
+A $2k+1$-component system is better than $2k-1$-component system
+\[ \iff p > \frac{1}{2} \]
+
+Derived expression:
+\[ \binom{2k-1}{k} p^k (1-p)^k (2p-1) \]
+Sign depends only on $2p-1$.
+
+\section{Final Summary of Tutorial}
+Concepts used in this tutorial:
+\begin{itemize}
+    \item Multinomial coefficients
+    \item Uniform distribution
+    \item Complement rule
+    \item De Morgan’s laws
+    \item Poisson distribution
+    \item Conditional probability
+    \item Gaussian distribution
+    \item Q-function
+    \item Binomial reliability comparison
+\end{itemize}
+All results were derived through direct substitution and algebraic simplification as demonstrated in class.
+
+\vspace{0.5cm}
+\begin{center}
+    \small \textit{End of Scribe}
+\end{center}
+
+\end{document}
