@@ -1,0 +1,243 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{geometry}
+\geometry{margin=1in}
+
+\title{CSE 400: Fundamentals of Probability in Computing\\
+Tutorial-1 Lecture Scribe}
+\date{February 13, 2026}
+
+\begin{document}
+\maketitle
+
+\section*{Q1: Partitioning of Dishes}
+
+\subsection*{Problem}
+20 distinct dishes are divided into 4 unlabeled groups of 5 dishes each.
+
+\subsection*{Result (a)}
+The number of ways to divide the dishes is
+\[
+\frac{20!}{(5!)^4 4!}.
+\]
+
+\subsection*{Derivation}
+Since:
+\begin{itemize}
+    \item All 20 dishes are distinct,
+    \item Each group contains 5 dishes,
+    \item Order within each group does not matter,
+    \item Order of groups does not matter,
+\end{itemize}
+we apply the multinomial coefficient formula.
+
+\subsection*{Result (b)}
+If each cuisine contains exactly 5 dishes, the probability that each platter contains dishes from only one cuisine is:
+\[
+\frac{(5!)^4 4!}{20!}.
+\]
+
+\section*{Q2: Uniform Arrival and Waiting Time}
+
+\subsection*{Assumption}
+Arrival time is uniformly distributed over 30 minutes.
+
+\subsection*{(a) Waiting time < 5 minutes}
+Favorable intervals: 10 minutes.
+
+\[
+P(\text{wait} < 5) = \frac{10}{30} = \frac{1}{3}.
+\]
+
+\subsection*{(b) Waiting time > 10 minutes}
+Favorable intervals: 10 minutes.
+
+\[
+P(\text{wait} > 10) = \frac{10}{30} = \frac{1}{3}.
+\]
+
+\section*{Q3: Conditional Probability}
+
+\subsection*{Given}
+\[
+P(L)=0.15,\quad P(E)=0.25,\quad P(L\cap E)=0.08.
+\]
+
+\subsection*{Compute}
+\[
+P(E^c)=0.75.
+\]
+
+\[
+P(L\cup E)=0.15+0.25-0.08=0.32.
+\]
+
+\[
+P(L^c \cap E^c)=1-0.32=0.68.
+\]
+
+\[
+P(L^c|E^c)=\frac{0.68}{0.75}\approx 0.907.
+\]
+
+\section*{Q4: Poisson Distribution (λ=0.2)}
+
+\subsection*{Definition}
+\[
+P(X=k)=e^{-\lambda}\frac{\lambda^k}{k!}.
+\]
+
+\subsection*{(a) P(X=0)}
+\[
+P(X=0)=e^{-0.2}=0.8187.
+\]
+
+\subsection*{(b) P(X\ge2)}
+\[
+P(X\ge2)=1-P(0)-P(1).
+\]
+
+\[
+P(1)=0.2e^{-0.2}=0.1637.
+\]
+
+\[
+P(X\ge2)=1-0.8187-0.1637=0.0176.
+\]
+
+\section*{Q5: Poisson Distribution (λ=3.5)}
+
+\subsection*{(a) P(X\ge2)}
+\[
+P(X\ge2)=1-P(0)-P(1).
+\]
+
+\[
+P(0)=0.0302,\quad P(1)=0.1057.
+\]
+
+\[
+P(X\ge2)=0.8641.
+\]
+
+\subsection*{(b) P(X\le1)}
+\[
+P(X\le1)=0.1359.
+\]
+
+\section*{Q6: Poisson Distribution (λ=3)}
+
+\subsection*{(a) P(X\ge3)}
+\[
+P(X\ge3)=1-P(0)-P(1)-P(2)=0.5768.
+\]
+
+\subsection*{(b)}
+\[
+P(X\ge3|X\ge1)=\frac{0.5768}{0.9502}\approx 0.607.
+\]
+
+\section*{Q7: Gaussian Distribution}
+
+\subsection*{PDF}
+\[
+f_X(x)=\frac{1}{\sqrt{8\pi}}\exp\left(-\frac{(x+3)^2}{8}\right).
+\]
+
+\[
+m=-3,\quad \sigma=2.
+\]
+
+\subsection*{Results}
+\[
+P(X\le0)=\Phi\left(\frac{3}{2}\right)=1-Q\left(\frac{3}{2}\right).
+\]
+
+\[
+P(X>4)=Q\left(\frac{7}{2}\right).
+\]
+
+\[
+P(|X+3|<2)=1-2Q(1).
+\]
+
+\[
+P(|X-2|>1)=1-Q(2)+Q(3).
+\]
+
+\section*{Q8: Jury Decision}
+
+If defendant is guilty:
+\[
+\sum_{i=8}^{12} \binom{12}{i}\theta^i(1-\theta)^{12-i}.
+\]
+
+If innocent:
+\[
+\sum_{i=5}^{12} \binom{12}{i}\theta^i(1-\theta)^{12-i}.
+\]
+
+Total probability:
+\[
+\alpha \sum_{i=8}^{12} \binom{12}{i}\theta^i(1-\theta)^{12-i}
++
+(1-\alpha)\sum_{i=5}^{12} \binom{12}{i}\theta^i(1-\theta)^{12-i}.
+\]
+
+\section*{Q9: PMF Normalization}
+
+\[
+p(i)=c\frac{\lambda^i}{i!}.
+\]
+
+\[
+ce^\lambda=1 \Rightarrow c=e^{-\lambda}.
+\]
+
+\[
+P(X=0)=e^{-\lambda}.
+\]
+
+\[
+P(X>2)=1-e^{-\lambda}-\lambda e^{-\lambda}-\frac{\lambda^2}{2}e^{-\lambda}.
+\]
+
+\section*{CDF Definition}
+
+\[
+F(a)=\sum_{x\le a} p(x).
+\]
+
+Example:
+\[
+F(a)=
+\begin{cases}
+0, & a<1 \\
+\frac14, & 1\le a<2 \\
+\frac34, & 2\le a<3 \\
+\frac78, & 3\le a<4 \\
+1, & a\ge4
+\end{cases}
+\]
+
+\section*{Q10: System Reliability}
+
+\subsection*{(a)}
+5-component system better than 3-component system if:
+\[
+3(p-1)^2(2p-1)>0
+\Rightarrow p>\frac12.
+\]
+
+\subsection*{(b)}
+\[
+P_{2k+1}-P_{2k-1}
+=
+\binom{2k-1}{k} p^k(1-p)^k(2p-1).
+\]
+
+\[
+>0 \iff p>\frac12.
+\]
+
+\end{document}
