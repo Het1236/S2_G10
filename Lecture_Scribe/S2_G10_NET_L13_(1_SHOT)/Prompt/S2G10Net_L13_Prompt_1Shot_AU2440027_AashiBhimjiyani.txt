@@ -1,0 +1,123 @@
+You are required to prepare a formal lecture scribe from the attached PDF:
+
+Tutorial-1: Solution
+CSE 400: Fundamentals of Probability in Computing
+School of Engineering and Applied Science (SEAS), Ahmedabad University
+February 13, 2026
+
+This lecture contains both practice questions and their complete solutions.
+The final output must be a single unified formal scribe containing both questions and answers together.
+
+Purpose
+
+Prepare a formal lecture scribe using the provided lecture slides. The scribe must serve as exam reference material and contain definitions, notations, assumptions, preliminaries, main results, proofs, conclusions, and worked examples exactly as presented in the lecture slides. Use only the lecture content. Do not add explanations, interpretations, assumptions, or examples not present in the lecture slides.
+
+REQUIRED STRUCTURE (DO NOT CHANGE ORDER)
+
+Definitions and Notations
+
+Assumptions and Preliminaries
+
+Main Result
+
+Proof
+
+Conclusion
+
+Working Examples
+
+ STRICT REQUIREMENTS (ALL MUST BE FOLLOWED)
+
+Use EXACTLY the section order listed above.
+
+Use ONLY the content present in the attached PDF.
+
+Include BOTH:
+
+All questions (Q1–Q10)
+
+Their complete solutions exactly as written
+
+Under Main Result, restate each question exactly as presented.
+
+Under Proof, include the complete derivations and solutions exactly as shown in the PDF.
+
+Under Working Examples, include:
+
+Final computed answers
+
+Final probability expressions
+
+Final simplified inequalities
+
+Final conclusions for each problem
+
+Preserve exactly:
+
+All mathematical expressions
+
+All factorials and multinomial forms
+
+All Poisson PMF formulas
+
+All binomial expressions
+
+All Gaussian PDF expressions
+
+All Q-function expressions
+
+All inequalities (≥, ≤, etc.)
+
+All parameters (λ, θ, p, α, etc.)
+
+All summations and limits
+
+All conditional probability formulas
+
+All step-function definitions
+
+Maintain the same symbolic notation as the PDF (do not rename variables).
+
+Do NOT:
+
+Add explanations
+
+Add intuition
+
+Add textbook theory
+
+Add extra steps not written in the PDF
+
+Simplify wording
+
+Omit intermediate steps
+
+Modify phrasing
+
+If any section (e.g., Conclusion) is not explicitly written in the lecture, leave that section blank.
+
+Maintain a formal academic tone suitable for exam reference material.
+
+ Special Formatting Instruction
+
+Since this is a solution lecture, structure each problem as:
+
+Question (under Main Result)
+
+Full derivation (under Proof)
+
+Final answer clearly shown
+
+No commentary outside what appears in the PDF
+
+All content must appear in one continuous structured scribe.
+
+ ABSOLUTE RULE
+
+This is an exam-reference document.
+
+Do NOT expand.
+Do NOT interpret.
+Do NOT summarize.
+Do NOT explain in your own words.
+Use only the lecture content exactly as written.
