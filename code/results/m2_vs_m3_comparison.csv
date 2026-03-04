@@ -1,0 +1,9 @@
+Metric,Milestone 2 (Probabilistic),Milestone 3 (Deterministic)
+Packets Used,1800 total,1800 (all logged)
+Sampling Rate,3%,100% (no sampling)
+Expected Packets (with sampling),54,1800
+Standard Deviation,7.24,0 (deterministic)
+95% CI Lower,40,N/A
+95% CI Upper,68,N/A
+Paths Found,Variable (stochastic),9
+Accuracy,Variable (depends on samples),100% (perfect for baseline)
