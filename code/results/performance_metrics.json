@@ -1,0 +1,64 @@
+{
+  "accuracy": {
+    "total_paths_found": 9,
+    "correctly_traced": 9,
+    "accuracy_percentage": 100.0,
+    "false_positives": 0,
+    "false_negatives": 0
+  },
+  "coverage": {
+    "mean_coverage": 33.33333333333333,
+    "std_coverage": 0.0,
+    "min_coverage": 33.33333333333333,
+    "max_coverage": 33.33333333333333,
+    "median_coverage": 33.33333333333333,
+    "coverages_per_path": [
+      33.33333333333333,
+      33.33333333333333,
+      33.33333333333333,
+      33.33333333333333,
+      33.33333333333333,
+      33.33333333333333,
+      33.33333333333333,
+      33.33333333333333,
+      33.33333333333333
+    ]
+  },
+  "packet_usage": {
+    "total_packets_logged": 7200,
+    "packets_per_path_mean": 4800.0,
+    "packets_per_path_std": 0.0,
+    "m2_predicted_with_sampling": 54,
+    "m3_actual_no_sampling": 7200,
+    "ratio_m3_to_m2": 133.33333333333334
+  },
+  "path_quality": {
+    "mean_path_length": 8.0,
+    "std_path_length": 0.0,
+    "min_path_length": 8,
+    "max_path_length": 8,
+    "total_hops": 72
+  },
+  "m2_comparison": {
+    "milestone2_model": {
+      "expected_packets_with_sampling": 54,
+      "std_dev": 7.24,
+      "ci_95": [
+        40,
+        68
+      ],
+      "sampling_rate": 0.03
+    },
+    "milestone3_actual": {
+      "total_packets_logged": 7200,
+      "sampling_rate": 1.0,
+      "paths_found": 9
+    },
+    "scaling_relationship": {
+      "expected_without_sampling": 1800.0,
+      "actual_without_sampling": 7200,
+      "ratio": 4.0,
+      "interpretation": "M3 uses ALL packets (deterministic) vs M2 predicted 3% sample"
+    }
+  }
+}

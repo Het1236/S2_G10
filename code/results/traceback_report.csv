@@ -1,0 +1,10 @@
+Attack Source,Victim,Path,Path Length (hops),Packets on Path,Coverage %
+host1,host4,host1 → switch1 → router1 → router5 → router8 → router2 → switch2 → host4,8,4800,33.33%
+host2,host4,host2 → switch1 → router1 → router5 → router8 → router2 → switch2 → host4,8,4800,33.33%
+host3,host4,host3 → switch1 → router1 → router5 → router8 → router2 → switch2 → host4,8,4800,33.33%
+host7,host4,host7 → switch3 → router3 → router6 → router8 → router2 → switch2 → host4,8,4800,33.33%
+host8,host4,host8 → switch3 → router3 → router6 → router8 → router2 → switch2 → host4,8,4800,33.33%
+host9,host4,host9 → switch3 → router3 → router6 → router8 → router2 → switch2 → host4,8,4800,33.33%
+host10,host4,host10 → switch4 → router4 → router7 → router8 → router2 → switch2 → host4,8,4800,33.33%
+host11,host4,host11 → switch4 → router4 → router7 → router8 → router2 → switch2 → host4,8,4800,33.33%
+host12,host4,host12 → switch4 → router4 → router7 → router8 → router2 → switch2 → host4,8,4800,33.33%
