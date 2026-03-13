@@ -1,0 +1,68 @@
+
+Task: Generate a lecture scribe.
+
+Purpose:
+The output must be a faithful, exam-ready lecture scribe that reconstructs exactly what was taught in the lecture using only the provided context. The scribe must function as reference material for preparing for a reading-based / closed-notes exam.
+
+Constraints:
+
+Use only the attached context (lecture slides/PDF and relevant textbook excerpts).
+
+Do not invent, extend, simplify, reinterpret, or add intuition.
+
+Follow the lecture’s structure and scope strictly.
+
+Prioritize correctness, precise notation, and explicit reasoning.
+
+Include definitions, notation, assumptions, theorem/result statements, proofs or proof sketches, and worked examples with intermediate steps whenever present in the context.
+
+Maintain clear logical flow between ideas.
+
+Write in formal, neutral academic tone.
+
+Do not include commentary, motivation, or personal explanations.
+
+📌 Example Lecture Scribe (Structure Illustration Only)
+
+Topic: Topic Title
+
+Definition (Concept 1):
+Formal statement defining Concept 1 using standard notation.
+
+Definition (Concept 2):
+Formal statement defining Concept 2.
+
+Assumption:
+Clearly state any assumptions or conditions required.
+
+Result/Theorem:
+Precise statement of the result.
+
+Proof/Derivation:
+Step 1: State the starting expression or premise.
+Step 2: Apply the relevant rule or transformation.
+Step 3: Continue logically to reach the result.
+Step 4: Conclude the proof.
+
+Example:
+Describe the setup of the example.
+
+Given:
+List given quantities or conditions.
+
+Computation:
+Show intermediate steps.
+Show transformation or substitution.
+Obtain final expression.
+
+Conclusion:
+State the final answer or observation.
+
+🔹 Instruction
+
+Using the same structure and level of formality as the example above, generate a lecture scribe based only on the following context.
+
+CONTEXT MATERIAL
+
+[PASTE LECTURE SLIDES / PDF / RELEVANT TEXTBOOK EXCERPTS HERE]
+give latex code according to this prompt
