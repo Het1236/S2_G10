@@ -1,0 +1,10 @@
+Metric,M3 (Deterministic),M4 (PSO + 3%)
+Algorithm,Greedy (Dijkstra),"PSO (w=0.8, c1=c2=2.0)"
+Sampling Rate,100% (no sampling),3% (Bernoulli)
+Packets Used,1800 (all logged),58
+Accuracy,100% (9/9),100.0% (9/9)
+Mean Coverage,33.33%,66.67%
+Coverage Std Dev,0% (deterministic),3.17%
+Convergence,Instant (1 step),51 iterations (avg)
+Memory Savings,0% (baseline),96.8%
+Variance,σ = 0,σ = 3.17

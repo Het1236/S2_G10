@@ -1,0 +1,15 @@
+{
+  "total_packets": 1800,
+  "sampled_packets": 58,
+  "sampling_probability": 0.03,
+  "router_counts": {
+    "router1": 24,
+    "router5": 24,
+    "router8": 58,
+    "router2": 58,
+    "router3": 15,
+    "router6": 15,
+    "router4": 19,
+    "router7": 19
+  }
+}
