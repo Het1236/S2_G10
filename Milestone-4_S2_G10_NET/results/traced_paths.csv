@@ -1,0 +1,10 @@
+source,path,coverage,iterations,converged
+host1,host1 → switch1 → router1 → router5 → router8 → router2 → switch2 → host4,70.6896551724138,51,True
+host2,host2 → switch1 → router1 → router5 → router8 → router2 → switch2 → host4,70.6896551724138,51,True
+host3,host3 → switch1 → router1 → router5 → router8 → router2 → switch2 → host4,70.6896551724138,51,True
+host7,host7 → switch3 → router3 → router6 → router8 → router2 → switch2 → host4,62.93103448275862,51,True
+host8,host8 → switch3 → router3 → router6 → router8 → router2 → switch2 → host4,62.93103448275862,51,True
+host9,host9 → switch3 → router3 → router6 → router8 → router2 → switch2 → host4,62.93103448275862,51,True
+host10,host10 → switch4 → router4 → router7 → router8 → router2 → switch2 → host4,66.37931034482759,51,True
+host11,host11 → switch4 → router4 → router7 → router8 → router2 → switch2 → host4,66.37931034482759,51,True
+host12,host12 → switch4 → router4 → router7 → router8 → router2 → switch2 → host4,66.37931034482759,51,True

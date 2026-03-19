@@ -1,0 +1,94 @@
+{
+  "m4_metrics": {
+    "accuracy": {
+      "total_sources": 9,
+      "successfully_traced": 9,
+      "accuracy_percentage": 100.0,
+      "false_positives": 0,
+      "false_negatives": 0
+    },
+    "coverage": {
+      "mean_coverage": 66.66666666666667,
+      "std_coverage": 3.1739543152836966,
+      "min_coverage": 62.93103448275862,
+      "max_coverage": 70.6896551724138,
+      "median_coverage": 66.37931034482759,
+      "coverages_per_source": {
+        "host1": 70.6896551724138,
+        "host2": 70.6896551724138,
+        "host3": 70.6896551724138,
+        "host7": 62.93103448275862,
+        "host8": 62.93103448275862,
+        "host9": 62.93103448275862,
+        "host10": 66.37931034482759,
+        "host11": 66.37931034482759,
+        "host12": 66.37931034482759
+      }
+    },
+    "convergence": {
+      "mean_iterations": 51.0,
+      "std_iterations": 0.0,
+      "min_iterations": 51,
+      "max_iterations": 51,
+      "convergence_rate": 100.0
+    },
+    "sampling": {
+      "total_packets": 1800,
+      "sampled_packets": 58,
+      "actual_sampling_rate": 0.03222222222222222,
+      "expected_sampling_rate": 0.03,
+      "expected_samples": 54.0,
+      "sampling_variance": 52.379999999999995
+    },
+    "memory": {
+      "m3_packets_stored": 1800,
+      "m4_packets_stored": 58,
+      "memory_savings_percent": 96.77777777777777,
+      "reduction_factor": 31.03448275862069
+    }
+  },
+  "m3_vs_m4_comparison": {
+    "accuracy": {
+      "m3": 100.0,
+      "m4": 100.0,
+      "difference": 0.0
+    },
+    "packets_used": {
+      "m3": 1800,
+      "m4": 58,
+      "savings_percent": 96.77777777777777
+    },
+    "coverage": {
+      "m3_mean": 33.33,
+      "m3_std": 0.0,
+      "m4_mean": 66.66666666666667,
+      "m4_std": 3.1739543152836966
+    },
+    "convergence": {
+      "m3": 1,
+      "m4_mean": 51.0,
+      "m4_std": 0.0
+    },
+    "algorithm": {
+      "m3": "Greedy (Dijkstra)",
+      "m4": "PSO (w=0.8, c1=c2=2.0)"
+    }
+  },
+  "m3_baseline": {
+    "total_packets": 1800,
+    "sampling_rate": 1.0,
+    "accuracy": 1.0,
+    "paths_found": 9,
+    "mean_coverage": 33.33,
+    "std_coverage": 0.0,
+    "algorithm": "Greedy (Dijkstra)",
+    "convergence_iterations": 1
+  },
+  "m2_predictions": {
+    "expected_packets": 54,
+    "std_dev": 7.24,
+    "ci_95_lower": 40,
+    "ci_95_upper": 68,
+    "sampling_rate": 0.03
+  }
+}

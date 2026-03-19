@@ -1,0 +1,328 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in, headheight=15pt]{geometry}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+
+% Setup page headers and footers to match the uploaded PDF style
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{CSE 400: Fundamentals of Probability in Computing}
+\rhead{Lecture Scribe}
+\cfoot{\thepage}
+
+\begin{document}
+
+% Title Block formatted similar to the PDF's opening lines
+\begin{flushleft}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{@{}ll}
+\textbf{Course:} & CSE400 – Fundamentals of Probability in Computing \\
+\textbf{Lecture Topic:} & Marginal PMF, Correlation, Covariance, Joint Gaussian Random Variables \\
+\textbf{Date:} & March 12, 2026 \\
+\textbf{Scribe:} & Het Patel \\
+\end{tabular}
+\end{flushleft}
+
+\vspace{0.3cm}
+
+\section{Opening Context (Real-Life Connection)}
+(Explicitly mentioned in lecture slides)
+
+Joint Gaussian models are widely used in:
+\begin{itemize}
+    \item Signal processing
+    \item Communication systems
+    \item Modeling noisy real-world measurements
+\end{itemize}
+
+\section{Marginal PMF}
+\subsection{Definition}
+Definition (as stated in lecture):\\
+For discrete random variables $X$ and $Y$, the joint PMF is:
+\[ p_{XY}(x,y) = P(X = x, Y = y) \]
+
+The marginal PMFs are:
+\[ p_X(x) = \sum_{y} p_{XY}(x,y) \]
+\[ p_Y(y) = \sum_{x} p_{XY}(x,y) \]
+
+\textbf{Key Idea (from lecture):}
+The marginal PMF of one variable is obtained by summing the joint PMF over all possible values of the other variable.
+
+\subsection{Notation}
+\begin{itemize}
+    \item $p_{XY}(x,y)$: Joint PMF
+    \item $p_X(x), p_Y(y)$: Marginal PMFs
+    \item Summation over other variable removes dependency
+\end{itemize}
+
+\subsection{Marginal PMF from Joint PMF Table}
+(From table shown in lecture slides)
+\begin{itemize}
+    \item Row sums $\rightarrow p_X(x)$
+    \item Column sums $\rightarrow p_Y(y)$
+\end{itemize}
+\[ p_X(x_i) = \sum_j p_{ij}, \quad p_Y(y_j) = \sum_i p_{ij} \]
+\[ \sum_i p_X(x_i) = 1, \quad \sum_j p_Y(y_j) = 1 \]
+
+\subsection{Worked Example (from lecture slides)}
+Given Joint PMF:
+\begin{center}
+\begin{tabular}{c|cc}
+      & $y=0$ & $y=1$ \\
+\hline
+$x=0$ & $\frac{1}{8}$ & $\frac{1}{4}$ \\[6pt]
+$x=1$ & $\frac{3}{8}$ & $\frac{1}{4}$ \\
+\end{tabular}
+\end{center}
+
+\textbf{Step 1: Compute $p_X(x)$}
+\[ p_X(0) = \frac{1}{8} + \frac{1}{4} = \frac{3}{8} \]
+\[ p_X(1) = \frac{3}{8} + \frac{1}{4} = \frac{5}{8} \]
+
+\textbf{Step 2: Compute $p_Y(y)$}
+\[ p_Y(0) = \frac{1}{8} + \frac{3}{8} = \frac{1}{2} \]
+\[ p_Y(1) = \frac{1}{4} + \frac{1}{4} = \frac{1}{2} \]
+
+\textbf{Final Answer:}
+\[
+p_X(x) =
+\begin{cases}
+\frac{3}{8}, & x=0 \\
+\frac{5}{8}, & x=1
+\end{cases}
+\quad
+p_Y(y) =
+\begin{cases}
+\frac{1}{2}, & y=0 \\
+\frac{1}{2}, & y=1
+\end{cases}
+\]
+
+\section{Correlation (Raw Measure)}
+\subsection{Definition (from lecture)}
+\[ R_{XY} = E[XY] \]
+
+\subsection{Interpretation}
+\begin{itemize}
+    \item Measures average value of product $XY$
+    \item Computed about origin (not centered)
+    \item Depends on: Mean, Spread, Dependence
+\end{itemize}
+
+\subsection{Important Observation}
+$R_{XY} = 0 \Rightarrow$ orthogonal about origin \\
+Not a clean dependence measure \\
+
+\textbf{Transition (as emphasized in lecture):}
+To remove mean effects $\rightarrow$ leads to Covariance
+
+\section{Covariance}
+\subsection{Definition}
+\[ \text{Cov}(X,Y) = E[(X - \mu_X)(Y - \mu_Y)] \]
+where:
+\[ \mu_X = E[X], \quad \mu_Y = E[Y] \]
+
+\subsection{Algebraic Form (Derived in Lecture)}
+Step-by-step expansion:
+\begin{align*}
+\text{Cov}(X,Y) &= E[XY - X\mu_Y - Y\mu_X + \mu_X\mu_Y] \\
+&= E[XY] - \mu_Y E[X] - \mu_X E[Y] + \mu_X\mu_Y \\
+&= E[XY] - \mu_X \mu_Y
+\end{align*}
+
+\subsection{Final Formula}
+\[ \text{Cov}(X,Y) = E[XY] - E[X]E[Y] \]
+
+\subsection{Interpretation (from slides)}
+\begin{itemize}
+    \item Positive covariance $\rightarrow$ variables increase together
+    \item Negative covariance $\rightarrow$ one increases, other decreases
+    \item Zero covariance $\rightarrow$ no linear relationship
+\end{itemize}
+\textbf{Warning:} Magnitude depends on units $\rightarrow$ cannot measure strength
+
+\section{Properties of Covariance}
+\begin{itemize}
+    \item \textbf{Symmetry:} $\text{Cov}(X,Y) = \text{Cov}(Y,X)$
+    \item \textbf{Variance as Special Case:} $\text{Cov}(X,X) = \text{Var}(X)$
+    \item \textbf{Linearity:} $\text{Cov}(aX+b, cY+d) = ac\,\text{Cov}(X,Y)$
+    \item \textbf{Independence $\Rightarrow$ Zero Covariance:} $X \perp Y \Rightarrow \text{Cov}(X,Y) = 0$
+\end{itemize}
+\textbf{Important Warning (from lecture):} Zero covariance $\neq$ independence
+
+\section{Worked Example 1 (from lecture)}
+\textbf{Problem:}
+If $Y = -2X + 3$, find $\text{Cov}(X,Y)$
+
+\textbf{Solution:}
+\[ \text{Cov}(X,Y) = E[XY] - E[X]E[Y] \]
+
+\textbf{Step 1: Compute $XY$}
+\[ XY = X(-2X + 3) = -2X^2 + 3X \]
+
+\textbf{Step 2: Compute expectations}
+\[ E[XY] = E[-2X^2 + 3X] = -2E[X^2] + 3E[X] \]
+\[ E[Y] = E[-2X + 3] = -2E[X] + 3 \]
+
+\textbf{Step 3: Substitute}
+\begin{align*}
+\text{Cov}(X,Y) &= (-2E[X^2] + 3E[X]) - E[X](-2E[X] + 3) \\
+&= -2E[X^2] + 3E[X] + 2(E[X])^2 - 3E[X] \\
+&= -2E[X^2] + 2(E[X])^2
+\end{align*}
+
+\textbf{Step 4: Use variance identity}
+\[ \text{Var}(X) = E[X^2] - (E[X])^2 \]
+\[ \Rightarrow \text{Cov}(X,Y) = -2\text{Var}(X) \]
+
+\section{Pearson’s Correlation Coefficient}
+\subsection{Definition}
+\[ \rho_{XY} = \frac{\text{Cov}(X,Y)}{\sqrt{\text{Var}(X)\text{Var}(Y)}} = \frac{\text{Cov}(X,Y)}{\sigma_X \sigma_Y} \]
+
+\subsection{Properties}
+\begin{itemize}
+    \item $-1 \le \rho_{XY} \le 1$
+    \item Unit-free
+    \item Measures strength + direction
+\end{itemize}
+
+\subsection{Interpretation}
+\begin{itemize}
+    \item $\rho > 0$: Positive linear trend
+    \item $\rho < 0$: Negative linear trend
+    \item $\rho = 0$: No linear correlation
+\end{itemize}
+
+\section{Worked Example 2 (Continuous Case)}
+\textbf{Given:}
+\[
+f_{XY}(x,y) =
+\begin{cases}
+\frac{xy}{96}, & 0 < x < 4,\ 1 < y < 5 \\
+0, & \text{otherwise}
+\end{cases}
+\]
+
+\textbf{Key Results (as derived in lecture slides)}
+\[ E[X] = \frac{8}{3}, \quad E[Y] = \frac{31}{9} \]
+\[ E[XY] = \frac{248}{27} \]
+\[ E[2X+3Y] = \frac{47}{3} \]
+\[ \text{Var}(X) = \frac{8}{9}, \quad \text{Var}(Y) = \frac{92}{81} \]
+
+\textbf{Covariance}
+\begin{align*}
+\text{Cov}(X,Y) &= E[XY] - E[X]E[Y] \\
+&= \frac{248}{27} - \left(\frac{8}{3} \cdot \frac{31}{9}\right) = 0
+\end{align*}
+
+\textbf{Correlation}
+\[ \rho_{XY} = 0 \]
+
+\section{Joint Gaussian Random Variables}
+\subsection{Definition}
+A pair $(X,Y)$ is jointly Gaussian if:
+\begin{itemize}
+    \item Joint PDF has bivariate Gaussian form
+    \item Marginals are Gaussian
+\end{itemize}
+
+\subsection{Joint PDF (as given in lecture)}
+\[
+f_{XY}(x,y) =
+\frac{1}{2\pi \sigma_X \sigma_Y \sqrt{1-\rho^2}}
+\exp\left(
+-\frac{1}{2(1-\rho^2)}
+\left[
+\left(\frac{x-\mu_X}{\sigma_X}\right)^2
++
+\left(\frac{y-\mu_Y}{\sigma_Y}\right)^2
+-
+2\rho \left(\frac{x-\mu_X}{\sigma_X}\right)\left(\frac{y-\mu_Y}{\sigma_Y}\right)
+\right]
+\right)
+\]
+
+\subsection{Parameters}
+\begin{itemize}
+    \item $\mu_X, \mu_Y$: Means
+    \item $\sigma_X, \sigma_Y$: Standard deviations
+    \item $\rho$: Correlation coefficient
+\end{itemize}
+
+\subsection{Interpretation (from lecture example)}
+If $\rho > 0$: variables increase together \\
+Example given: CO$_2$ concentration vs temperature \\
+Higher CO$_2 \rightarrow$ higher temperature trend
+
+\section{Connection to Previous Material}
+\begin{itemize}
+    \item \textbf{Uses:} Expectation $E[X]$, Variance definition
+    \item \textbf{Extends:} Single RV $\rightarrow$ Joint RV analysis
+    \item \textbf{Leads to:} Multivariate distributions
+\end{itemize}
+
+\section{Summary \& Key Takeaways}
+\begin{itemize}
+    \item Marginal PMF = sum over other variable
+    \item $E[XY]$ is raw correlation (not centered)
+    \item Covariance removes mean effect
+    \item Covariance: sign $\rightarrow$ direction, not strength
+    \item Pearson coefficient: normalized measure, gives strength + direction
+    \item Zero covariance $\neq$ independence
+    \item Joint Gaussian: fundamental continuous model
+\end{itemize}
+
+\newpage
+
+\section*{APPENDIX A: Quick Reference Sheet}
+
+\textbf{Formulas}
+\vspace{0.3cm}
+
+\noindent
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Concept} & \textbf{Formula} \\
+\hline
+Marginal PMF & $p_X(x) = \sum_y p_{XY}(x,y)$ \\
+\hline
+Correlation (raw) & $E[XY]$ \\
+\hline
+Covariance & $E[XY] - E[X]E[Y]$ \\
+\hline
+Pearson Coefficient & $\rho = \frac{\text{Cov}}{\sigma_X \sigma_Y}$ \\
+\hline
+Joint Gaussian PDF & (as given in section 9.2) \\
+\hline
+\end{tabular}
+
+\vspace{0.5cm}
+\textbf{Key Conditions}
+\begin{itemize}
+    \item Marginalization $\rightarrow$ sum over other variable
+    \item Covariance uses centered variables
+    \item Independence $\Rightarrow$ covariance = 0
+    \item \textbf{Warning:} Converse not true
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Buzz Words (from lecture)}
+\begin{itemize}
+    \item ``Summing out'' $\rightarrow$ marginalization
+    \item ``Centered variables'' $\rightarrow$ covariance
+    \item ``Normalized'' $\rightarrow$ Pearson coefficient
+    \item ``Linear relationship'' $\rightarrow$ correlation
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Space for Intuition (Not in Lecture)}
+\begin{itemize}
+    \item Marginal PMF = ``ignore the other variable''
+    \item Covariance = ``do deviations move together?''
+    \item Pearson = ``scaled covariance''
+\end{itemize}
+
+\end{document}
