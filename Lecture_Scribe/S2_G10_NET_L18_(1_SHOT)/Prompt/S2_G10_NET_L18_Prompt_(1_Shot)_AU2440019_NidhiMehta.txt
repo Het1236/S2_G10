@@ -1,0 +1,70 @@
+S2_G10_NET_L18_Prompt_(1_Shot)_AU2440019_NidhiMehta
+
+
+
+
+
+You are an advanced academic scribe. Your goal is to create a comprehensive, detailed, and strictly accurate lecture record based ONLY on the provided lecture file.  
+STRICT CONSTRAINTS:  Source Material: Use ONLY the text, equations, and images found in the attached document. Do not hallucinate or bring in outside assumptions.  
+DETAIL LEVEL: HIGH. Do not summarize. When a proof or example is provided in the slides, you must break it down step-by-step.  
+Explanations: In "Proofs" and "Worked Examples," you must explain what operation is happening and why (e.g., "Applying the Inclusion-Exclusion Principle because the events are not disjoint").  
+Final Output: Generate the full text of this scribe.   
+Structure (Follow the format and depth of this example exactly):  
+[ONE-SHOT EXAMPLE START]  
+Lecture Scribe: Fundamentals of Geometry  Lecture 1: Quadrilateral Properties  Name: [Student Name] | Enrollment No: [Student ID]  Table of Contents  Properties of Rectangles  Topic 1: Properties of Rectangles  1. Definitions and Notation  Definition 1.1 (Rectangle): A quadrilateral is defined as a rectangle if it has four interior right angles ($90^\circ$). It is denoted as $\square ABCD$.  Notation: The length of the segment connecting points $A$ and $B$ is denoted by $|AB|$. The area is denoted by $\mathcal{A}$.  2. Theorems and Results  Theorem 1.1 (Diagonal Equality): If a quadrilateral is a rectangle, its diagonals are equal in length.  Mathematical Statement: If $\square ABCD$ is a rectangle, then $|AC| = |BD|$.  3. Proofs and Derivations  Proof of Theorem 1.1:  Objective: We aim to prove $|AC| = |BD|$ using triangle congruence.  Step 1: Identify two overlapping triangles, $\triangle ABC$ and $\triangle BAD$.  Step 2: Observe that $|AD| = |BC|$.  Reasoning: Opposite sides of a rectangle are equal by definition.  Step 3: Observe that $\angle DAB = \angle CBA = 90^\circ$.  Reasoning: All angles in a rectangle are right angles (Definition 1.1).  Step 4: Observe that side $|AB|$ is common to both triangles.  Reasoning: Reflexive property.  Step 5: Apply the SAS (Side-Angle-Side) Congruence Criterion.  Conclusion: $\triangle ABC \cong \triangle BAD$.  Step 6: By CPCTC (Corresponding Parts of Congruent Triangles are Congruent), the hypotenuses must be equal.  Final Result: $|AC| = |BD|$. Q.E.D.  4. Worked Examples  Example 1.1: Calculation of Diagonal Length  Problem Statement: Consider a rectangle with width $w=3$ and height $h=4$. Calculate the length of the diagonal $d$.  
+Solution Steps:  Identify the relationship: A rectangle contains right angles. Therefore, the diagonal divides the rectangle into two right-angled triangles. We can use the Pythagorean Theorem.  
+State the Formula: $a^2 + b^2 = c^2$, where $a$ and $b$ are sides and $c$ is the hypotenuse (diagonal).  Substitution: Substitute $w=3$ and $h=4$ into the equation:  $$d^2 = 3^2 + 4^2$$  CALCULATION:  $$d^2 = 9 + 16 = 25$$  Final Step: Take the square root to find length.  $$d = \sqrt{25} = 5$$  Answer: The diagonal length is 5 units.  
+[ONE-SHOT EXAMPLE END]  
+Task:  Using the structure and depth of the example above, generate the Lecture Scribe for the attached lecture file.  Write the full content in detail in Markdown first.          
+
+Also follow the following structure:--   
+(A) Instructions to follow along with the lecture PDF, the model needs to take references to the relevant topics and concepts mentioned in the lecture PDF from the textbooks I have recommended below:
+
+
+
+Sheldon Ross — First Course in Probability
+Edition: 10th Edition
+Publisher: Pearson Higher Education
+Year: 2019
+
+
+
+Michael Mitzenmacher & Eli Upfal — Probability and Computing: Randomization and Probabilistic Techniques in Algorithms and Data Analysis
+Edition: 2nd Edition
+Publisher: Cambridge University Press
+Year: 2017
+
+
+
+Sheldon Ross — Probability Models for Computer Science
+Edition: 1st Edition
+Publisher: Harcourt Academic Press
+Year: 2002
+
+
+1A. Also, you should always be able to choose the relevant, appropriate and important book for every topic/concept mentioned in the lecture PDF from all three 3 books.   
+2A. And for each topic/concept explained in the lecture PDF just choose the best relevant and appropriate book that has relevant, connected with exam( a must to practice), MENTIONED IN THE LECTURE PDF and same-type examples of the topic with a little twist (but the twist must include only topics priorly learnt from that lecture and  no out-of-syllabus twist)are valid practice examples based on that topic.    
+3A. And the real task lies in EXTRACTING relevant, same-type, and appropriate EXAMPLES from the book based on the TOPIC MENTIONED IN THE LECTURE PDF and including them in the text for practice.  
+4A. Also, you must refer to only 1 book for each topic for the practice examples.    5A. No multiple books for 1 topic.   
+6A. The example or practice questions extracted from the book included should be accurate, and the questions should be solved as well with detailed explanations of every step and method, and the explanation regarding the usage of the method.   7A. If you can't answer accurately with 100% accuracy, then it should just have solvable practice questions of the lecture PDF only, no need to provide false answers.     
+(B) For the examples provided in the lecture PDF(Compulsory):  
+1B. Include every example of the lecture PDF, no matter how trivial it is.  
+2B. The included example should have step-wise and accurate calculations.   
+3B. If the example is not solved and there is no answer shown in the lecture PDF, then you must try to calculate the answer and solve the question, but the CONDITION is that the ANSWER must be ACCURATE.   
+4B. If you can't generate an accurate answer of the example question, then don't include the answer.    
+5B. If the accurate answer is included, then the answer must include explanations of the methods used and the steps taken.   
+6B. If there is an IMAGE OR VIDEO included in the Lecture Scribe regarding the example, then you should include the working direct video link and if there is an image, you should give the description of the image and should clearly state on which PDF page it is mentioned.     
+(C)Now let's talk about concluding the lecture scribe. You must conclude the lecture scribe with the following content:  
+1C. You must SUMMARISE the content that was taught in the class. And instead of summarising the content in a boring and traditional way, you will give an interesting summary of the content such that any student can memorise it before the exam easily and simply for instance(you must ensure the tricks given in this summary section will ensure that the student reading the content will surely REMEMBER the topics and content in such a way that it is IMPRINTED in their MEMORY and they won't be able to forget the content, even if they want to).  
+2C. For summarising the content, you should first list the concepts with keywords that are correlated and the main things to remember in that particular concept. Like a description or one-word correlation for that concept/topic that is used in flashcards.   
+3C. The STRUCTURE FOR THE SUMMARY should flow as, it should start from definitions, proofs and THEOREMS in short, brief phrases or keywords.   
+4C. Then, proceed with the FORMULA associated with the concept, and then you should state what to remember from this lecture and what to absorb/learn and understand in this lecture.   
+5C. Then you should include the APPLICATIONS of all the formulas MENTIONED in the LECTURE PDF (e.g., how those formulas can be applied in different scenarios and examples), with those scenarios and examples referenced either in the lecture PDF or in the textbooks mentioned.  
+6C. And also note that those scenarios and examples must be useful for exam preparation. The applications should be brief yet easy to understand, broken down into phrases, even when the concept is complex. After that, there should also be a mention of TRICKS IN FORMULA APPLICATIONS.    
+7C. Then, at the very end, you should list COMMON MISTAKES made by students in exams on the topics or concepts covered in the lecture PDF, and should be under the note "Be Careful:".    
+Now, regarding the PDF TEXT formatting:  
+1) Justify the alignment, start each concept or topic on a new page, start each example on a new page, and list the table of contents on the page of lecture metadata.  
+2) Also, this is the FIRST & FINAL PROMPT, and there will be no further prompts in this chat. So, you must do what it's told without any questions in this chat.   
+3) For the summarisation part, there should be a different section and the summary should start from a new page with every element of the flow structure in a different section, like the key phrases section should be different from the formula section and so on.  
+4) Also, it must STRICTLY FOLLOW THE FLOW STRUCTURE I STATED.  
+NOW GENERATE THE TEXT AND THE CONTENT FOR THE SCRIBE STRICTLY AND EXACTLY AS I MENTIONED ABOVE & TRY TO INCLUDE DIRECT TEXTBOOK EXAMPLES IF POSSIBLE (NOTE: EXAMPLES MUST HAVE DETAILED CALCULATIONS).     
