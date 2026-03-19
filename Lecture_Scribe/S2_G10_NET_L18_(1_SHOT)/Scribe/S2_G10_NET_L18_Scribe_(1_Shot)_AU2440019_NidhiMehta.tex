@@ -1,0 +1,486 @@
+\documentclass[11pt]{article}
+
+\usepackage{amsmath, amssymb}
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{tcolorbox} % For attractive definition boxes
+\usepackage{booktabs}  % For professional tables
+\usepackage{enumitem}  % For better list formatting
+\usepackage{xcolor}    % For subtle color styling
+
+\geometry{margin=1in}
+\setstretch{1.15}
+
+% Custom styling for headers
+\usepackage{titlesec}
+\titleformat{\section}{\Large\bfseries\color{blue!80!black}}{\thesection}{1em}{}[\titlerule]
+\titleformat{\subsection}{\large\bfseries\color{black!80}}{\thesubsection}{1em}{}
+
+\begin{document}
+
+\begin{center}
+\hrule \vspace{0.4cm}
+{\Large \textbf{Lecture Scribe: Marginal PMF, Correlation, Covariance, Joint Gaussian RVs}}\\[0.2cm]
+\textbf{Course:} CSE400 – Fundamentals of Probability in Computing\\[0.1cm]
+\textbf{Lecture:} 18 \textbar\ \textbf{Instructor:} Dhaval Patel, PhD\\[0.1cm]
+\textbf{Date:} March 12, 2026\\[0.1cm]
+\textbf{Name:} [Student Name] \textbar\ \textbf{Enrollment No:} [Student ID]
+\vspace{0.3cm} \hrule
+\end{center}
+
+\vspace{0.5cm}
+
+\textbf{\Large Table of Contents}
+\begin{enumerate}[label=\textbf{\arabic*.}, leftmargin=*]
+    \item Marginal PMF
+    \begin{itemize}[label=--]
+        \item Definition
+        \item Marginal PMF from Joint PMF Table
+        \item Solved Example
+    \end{itemize}
+    \item Correlation
+    \item Covariance
+    \begin{itemize}[label=--]
+        \item Definition and Interpretation
+        \item Algebraic Form and Properties
+        \item Solved Examples
+    \end{itemize}
+    \item Pearson’s Correlation Coefficient
+    \item Joint Gaussian Random Variables
+    \begin{itemize}[label=--]
+        \item Definition and Intuition
+        \item Algebraic Form and Interpretation
+    \end{itemize}
+\end{enumerate}
+
+\newpage
+
+\section*{Topic 1: Marginal PMF}
+
+\subsection*{1. Definitions and Notation}
+
+\begin{tcolorbox}[colback=blue!5!white,colframe=blue!75!black,title=\textbf{Definition 1.1 (Joint PMF):}]
+For discrete random variables $X$ and $Y$, the joint PMF is defined as:
+\[
+p_{XY}(x,y) = P(X=x, Y=y)
+\]
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=blue!5!white,colframe=blue!75!black,title=\textbf{Definition 1.2 (Marginal PMF):}]
+The marginal PMF of a random variable is obtained by summing the joint PMF over all possible values of the other variable.
+\[
+p_X(x) = \sum_y p_{XY}(x,y), \quad p_Y(y) = \sum_x p_{XY}(x,y)
+\]
+\end{tcolorbox}
+
+\noindent\textbf{Key Idea:}\\
+The marginal PMF of one variable is obtained by summing the joint PMF over all possible values of the other variable.
+
+\subsection*{2. Marginal PMF from Joint PMF Table}
+
+From the table representation on page 7–8:
+\begin{itemize}
+    \item Row sums $\rightarrow p_X(x)$
+    \item Column sums $\rightarrow p_Y(y)$
+\end{itemize}
+
+\noindent Mathematically:
+\[
+p_X(x_i) = \sum_j p_{ij}, \quad p_Y(y_j) = \sum_i p_{ij}
+\]
+
+\noindent Also:
+\[
+\sum_i p_X(x_i) = 1, \quad \sum_j p_Y(y_j) = 1
+\]
+
+\noindent\textbf{Explanation:}\\
+Summation is applied because probabilities over all possible outcomes must add to 1 (axiom of probability).
+
+\newpage
+
+\subsection*{3. Worked Example 1 (From Lecture PDF)}
+
+\noindent\textbf{Problem Statement (Page 9–11):}\\
+Joint PMF is given as:
+
+\begin{table}[h]
+\centering
+\begin{tabular}{c|cc}
+\toprule
+\textbf{$p_{XY}(x,y)$} & \textbf{$y=0$} & \textbf{$y=1$} \\
+\midrule
+$x=0$ & $1/8$ & $1/4$ \\
+$x=1$ & $3/8$ & $1/4$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\noindent\textbf{Step-by-Step Solution}
+
+\noindent \textbf{Step 1: Compute $p_X(x)$}
+\begin{align*}
+p_X(0) &= \frac{1}{8} + \frac{1}{4} = \frac{1}{8} + \frac{2}{8} = \frac{3}{8} \\[0.2cm]
+p_X(1) &= \frac{3}{8} + \frac{1}{4} = \frac{3}{8} + \frac{2}{8} = \frac{5}{8}
+\end{align*}
+
+\noindent \textbf{Step 2: Compute $p_Y(y)$}
+\begin{align*}
+p_Y(0) &= \frac{1}{8} + \frac{3}{8} = \frac{4}{8} = \frac{1}{2} \\[0.2cm]
+p_Y(1) &= \frac{1}{4} + \frac{1}{4} = \frac{1}{2}
+\end{align*}
+
+\noindent \textbf{Final Answer:}
+\[
+p_X(x) =
+\begin{cases}
+3/8, & x=0 \\
+5/8, & x=1
+\end{cases}
+\quad
+p_Y(y) =
+\begin{cases}
+1/2, & y=0 \\
+1/2, & y=1
+\end{cases}
+\]
+
+\vspace{0.5cm}
+\noindent\textbf{Practice Example (From Sheldon Ross – A First Course in Probability)}
+
+\noindent\textbf{Problem:}\\
+Given:
+\[
+p_{XY}(x,y)=\frac{1}{6} \text{ for } (x,y)\in\{(1,1),(1,2),(2,1),(2,2),(3,1),(3,2)\}
+\]
+Find marginal PMFs.
+
+\noindent\textbf{Solution:}
+\begin{align*}
+p_X(1) &= \frac{1}{6}+\frac{1}{6}=\frac{1}{3}, \quad
+p_X(2)=\frac{1}{3}, \quad
+p_X(3)=\frac{1}{3} \\[0.2cm]
+p_Y(1) &= \frac{3}{6}=\frac{1}{2}, \quad
+p_Y(2)=\frac{3}{6}=\frac{1}{2}
+\end{align*}
+
+\noindent\textbf{Reasoning:} Uniform distribution over 6 outcomes.
+
+\newpage
+
+\section*{Topic 2: Correlation}
+
+\subsection*{1. Definition}
+
+\noindent Correlation is defined as:
+\[
+\boxed{R_{XY} = E[XY]}
+\]
+
+\noindent\textbf{Interpretation (Page 12–13):}
+\begin{itemize}
+    \item Measures average product of $X$ and $Y$
+    \item Computed about origin (not mean)
+    \item Depends on scale
+    \item Mixes mean, spread, dependence
+\end{itemize}
+
+\noindent\textbf{Key Insight:}
+\[
+R_{XY} = 0 \Rightarrow \text{orthogonal about origin}
+\]
+
+\noindent\textbf{Transition:}\\
+To remove effect of means $\rightarrow$ use Covariance.
+
+\newpage
+
+\section*{Topic 3: Covariance}
+
+\subsection*{1. Definition and Interpretation}
+
+\[
+\text{Cov}(X,Y)=E[(X-\mu_X)(Y-\mu_Y)]
+\]
+
+\noindent Where:
+\[
+\mu_X = E[X], \quad \mu_Y = E[Y]
+\]
+
+\noindent\textbf{Interpretation (Page 15–16 diagrams):}
+\begin{itemize}
+    \item $>0$: Positive covariance $\rightarrow$ variables move together
+    \item $<0$: Negative covariance $\rightarrow$ opposite movement
+    \item $=0$: No linear relationship
+\end{itemize}
+
+\noindent\textbf{Important Note:}\\
+Magnitude depends on units $\rightarrow$ cannot measure strength reliably.
+
+\subsection*{2. Algebraic Derivation}
+
+\begin{align*}
+\text{Cov}(X,Y) &= E[(X-\mu_X)(Y-\mu_Y)] \\
+&= E[XY - X\mu_Y - Y\mu_X + \mu_X\mu_Y] \\
+&= E[XY] - \mu_Y E[X] - \mu_X E[Y] + \mu_X\mu_Y \\
+&= E[XY] - \mu_X\mu_Y
+\end{align*}
+
+\noindent\textbf{Final Formula}
+\begin{tcolorbox}[colback=green!5!white,colframe=green!60!black,width=\linewidth,arc=1mm,auto outer arc]
+\[
+\text{Cov}(X,Y)=E[XY]-E[X]E[Y]
+\]
+\end{tcolorbox}
+
+\subsection*{3. Properties}
+
+\begin{itemize}
+    \item $\text{Cov}(X,Y)=\text{Cov}(Y,X)$
+    \item $\text{Cov}(X,X)=\text{Var}(X)$
+    \item $\text{Cov}(aX+b,cY+d)=ac\,\text{Cov}(X,Y)$
+    \item $X \perp Y \Rightarrow \text{Cov}(X,Y)=0$
+\end{itemize}
+
+\noindent\textbf{Important:}\\
+Zero covariance $\neq$ independence.
+
+\newpage
+
+\subsection*{4. Worked Example 2 (From Lecture PDF)}
+
+\noindent\textbf{Problem (Page 24–28):}\\
+If:
+\[
+Y=-2X+3
+\]
+Find:
+\[
+\text{Cov}(X,Y)
+\]
+
+\noindent\textbf{Step-by-step Solution}
+
+\noindent Using:
+\[
+\text{Cov}(X,Y)=E[XY]-E[X]E[Y]
+\]
+
+\noindent \textbf{Step 1: Compute $XY$}
+\[
+XY = X(-2X+3)= -2X^2 + 3X
+\]
+
+\noindent \textbf{Step 2: Compute $E[Y]$}
+\[
+E[Y]=E[-2X+3]=-2E[X]+3
+\]
+
+\noindent \textbf{Step 3: Substitute}
+\begin{align*}
+\text{Cov}(X,Y) &= E[-2X^2+3X] - E[X](-2E[X]+3) \\
+&= -2E[X^2] + 3E[X] + 2(E[X])^2 -3E[X] \\
+&= -2E[X^2] + 2(E[X])^2
+\end{align*}
+
+\noindent \textbf{Step 4: Recognize variance}
+\[
+\text{Var}(X)=E[X^2]-(E[X])^2
+\]
+
+\noindent Thus:
+\[
+\text{Cov}(X,Y) = -2\text{Var}(X)
+\]
+
+\noindent \textbf{Final Answer:}
+\[
+\boxed{\text{Cov}(X,Y) = -2\text{Var}(X)}
+\]
+
+\newpage
+
+\subsection*{5. Worked Example 3 (Continuous Case from PDF)}
+
+\noindent\textbf{Given (Page 33):}
+\[
+f_{XY}(x,y)=\frac{xy}{96}, \quad 0<x<4,\;1<y<5
+\]
+
+\noindent \textbf{Step 1: Compute $E[X]$}
+\[
+E[X]=\frac{1}{8}\int_0^4 x^2 dx = \frac{1}{8}\cdot \frac{4^3}{3} = \frac{8}{3}
+\]
+
+\noindent \textbf{Step 2: Compute $E[Y]$}
+\[
+E[Y]=\frac{1}{12}\int_1^5 y^2 dy = \frac{31}{9}
+\]
+
+\noindent \textbf{Step 3: Compute $E[XY]$}\\
+Since independent:
+\[
+E[XY]=E[X]E[Y]=\frac{8}{3}\cdot \frac{31}{9}=\frac{248}{27}
+\]
+
+\noindent \textbf{Step 4: Compute $E[2X+3Y]$}\\
+Using linearity:
+\[
+E[2X+3Y] = 2E[X]+3E[Y]=\frac{47}{3}
+\]
+
+\noindent \textbf{Step 5: Compute Variances}
+\[
+\text{Var}(X)=\frac{8}{9}, \quad \text{Var}(Y)=\frac{92}{81}
+\]
+
+\noindent \textbf{Step 6: Compute Covariance}
+\[
+\text{Cov}(X,Y)=E[XY]-E[X]E[Y]=0
+\]
+
+\noindent \textbf{Step 7: Pearson Coefficient}
+\[
+\rho_{XY}=0
+\]
+
+\newpage
+
+\section*{Topic 4: Pearson’s Correlation Coefficient}
+
+\subsection*{1. Definition}
+\[
+\rho_{XY} = \frac{\text{Cov}(X,Y)}{\sqrt{\text{Var}(X)\text{Var}(Y)}}
+\]
+
+\subsection*{2. Properties (Page 31–32)}
+\begin{itemize}
+    \item Measures strength + direction
+    \item Normalized covariance
+    \item Unit-free
+    \item Range: $-1 \le \rho \le 1$
+\end{itemize}
+
+\noindent\textbf{Interpretation}
+\begin{itemize}
+    \item (+1): Perfect positive
+    \item (-1): Perfect negative
+    \item (0): No linear correlation
+\end{itemize}
+
+\noindent\textbf{Practice Example (Mitzenmacher \& Upfal Inspired)}\\
+If:
+\[
+\text{Cov}(X,Y)=6,\; \sigma_X=2,\; \sigma_Y=3
+\]
+\[
+\rho=\frac{6}{2\cdot 3}=1
+\]
+\textbf{Interpretation:} Perfect linear relationship.
+
+\newpage
+
+\section*{Topic 5: Joint Gaussian Random Variables}
+
+\subsection*{1. Definition}
+A pair $(X,Y)$ is jointly Gaussian if:
+\begin{itemize}
+    \item Joint PDF is Gaussian
+    \item Marginals are Gaussian
+\end{itemize}
+
+\subsection*{2. Algebraic Form}
+\[
+f_{XY}(x,y)=\frac{1}{2\pi\sigma_X\sigma_Y\sqrt{1-\rho^2}}
+\exp\left(
+-\frac{1}{2(1-\rho^2)}\left[
+\left(\frac{x-\mu_X}{\sigma_X}\right)^2
++
+\left(\frac{y-\mu_Y}{\sigma_Y}\right)^2
+-2\rho\left(\frac{x-\mu_X}{\sigma_X}\right)\left(\frac{y-\mu_Y}{\sigma_Y}\right)
+\right]
+\right)
+\]
+
+\noindent\textbf{Parameters}
+\begin{itemize}
+    \item $(\mu_X, \mu_Y)$: Means
+    \item $(\sigma_X, \sigma_Y)$: Standard deviations
+    \item $(\rho)$: Correlation coefficient
+\end{itemize}
+
+\subsection*{3. Interpretation (Page 53–54)}
+\noindent\textbf{Example:}\\
+$X$: CO₂ concentration\\
+$Y$: Temperature
+
+\noindent If:
+\[
+\rho > 0 \Rightarrow \text{Higher CO₂ → Higher temperature}
+\]
+
+\noindent\textbf{Applications:}
+\begin{itemize}
+    \item Signal processing
+    \item Communication systems
+    \item Noisy measurements
+\end{itemize}
+
+\newpage
+
+\section*{FINAL SUMMARY (MEMORY-OPTIMIZED)}
+
+\subsection*{1. Key Concepts (Flashcard Style)}
+\begin{itemize}
+    \item \textbf{Marginal PMF} $\rightarrow$ “Sum out the other variable”
+    \item \textbf{Correlation} $\rightarrow$ “Raw product measure”
+    \item \textbf{Covariance} $\rightarrow$ “Centered dependence”
+    \item \textbf{Pearson} $\rightarrow$ “Normalized covariance”
+    \item \textbf{Gaussian} $\rightarrow$ “Bell-shaped joint behavior”
+\end{itemize}
+
+\subsection*{2. Formulas to Remember}
+\begin{align*}
+p_X(x) &= \sum_y p_{XY}(x,y) \\
+\text{Cov}(X,Y) &= E[XY]-E[X]E[Y] \\
+\rho &= \frac{\text{Cov}(X,Y)}{\sigma_X\sigma_Y}
+\end{align*}
+
+\subsection*{3. What to Learn}
+\begin{itemize}
+    \item Difference: correlation vs covariance
+    \item Why centering is important
+    \item Independence vs zero covariance
+    \item Reading joint distributions
+\end{itemize}
+
+\subsection*{4. Applications (Exam-Oriented)}
+\begin{itemize}
+    \item \textbf{Marginalization} $\rightarrow$ tables \& joint distributions
+    \item \textbf{Covariance} $\rightarrow$ detect direction of dependence
+    \item \textbf{Pearson} $\rightarrow$ measure strength
+    \item \textbf{Gaussian} $\rightarrow$ modeling real-world noise
+\end{itemize}
+
+\subsection*{5. Tricks}
+\begin{itemize}
+    \item \textbf{Independence} $\Rightarrow$ directly use $E[XY]=E[X]E[Y]$
+    \item \textbf{Linear transformation} $\rightarrow$ use covariance property
+    \item \textbf{For tables} $\rightarrow$ sum rows/columns quickly
+\end{itemize}
+
+\subsection*{6. Be Careful:}
+\begin{itemize}
+    \item Zero covariance $\neq$ independence
+    \item Correlation depends on scaling
+    \item Forgetting to subtract mean in covariance
+    \item Misusing joint vs marginal distributions
+    \item Integration limits in continuous cases
+\end{itemize}
+
+\begin{center}
+\textbf{END OF SCRIBE}
+\end{center}
+
+\end{document}
