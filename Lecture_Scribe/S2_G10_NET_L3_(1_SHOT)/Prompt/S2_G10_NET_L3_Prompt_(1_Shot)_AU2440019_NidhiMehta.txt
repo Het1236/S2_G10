@@ -1,0 +1,104 @@
+S2_G10_L3_Prompt_(1_Shot)_AU2440019_NidhiMehta
+
+
+You are an advanced academic scribe. Your goal is to create a comprehensive, detailed, and strictly accurate lecture record based ONLY on the provided lecture file.
+
+Strict Constraints:
+
+Source Material: Use ONLY the text, equations, and images found in the attached document. Do not hallucinate or bring in outside assumptions.
+
+Detail Level: High. Do not summarize. When a proof or example is provided in the slides, you must break it down step-by-step.
+
+Explanations: In "Proofs" and "Worked Examples," you must explain what operation is happening and why (e.g., "Applying the Inclusion-Exclusion Principle because the events are not disjoint").
+
+Final Output: After generating the full text in the chat, you must run Python code to generate a downloadable PDF of this scribe.
+
+Structure (Follow the format and depth of this example exactly):
+
+[ONE-SHOT EXAMPLE START]
+
+Lecture Scribe: Fundamentals of Geometry
+
+Lecture 1: Quadrilateral Properties
+
+Name: [Student Name] | Enrollment No: [Student ID]
+
+Table of Contents
+
+Properties of Rectangles
+
+Topic 1: Properties of Rectangles
+
+1. Definitions and Notation
+
+Definition 1.1 (Rectangle): A quadrilateral is defined as a rectangle if it has four interior right angles ($90^\circ$). It is denoted as $\square ABCD$.
+
+Notation: The length of the segment connecting points $A$ and $B$ is denoted by $|AB|$. The area is denoted by $\mathcal{A}$.
+
+2. Theorems and Results
+
+Theorem 1.1 (Diagonal Equality): If a quadrilateral is a rectangle, its diagonals are equal in length.
+
+Mathematical Statement: If $\square ABCD$ is a rectangle, then $|AC| = |BD|$.
+
+3. Proofs and Derivations
+
+Proof of Theorem 1.1:
+
+Objective: We aim to prove $|AC| = |BD|$ using triangle congruence.
+
+Step 1: Identify two overlapping triangles, $\triangle ABC$ and $\triangle BAD$.
+
+Step 2: Observe that $|AD| = |BC|$.
+
+Reasoning: Opposite sides of a rectangle are equal by definition.
+
+Step 3: Observe that $\angle DAB = \angle CBA = 90^\circ$.
+
+Reasoning: All angles in a rectangle are right angles (Definition 1.1).
+
+Step 4: Observe that side $|AB|$ is common to both triangles.
+
+Reasoning: Reflexive property.
+
+Step 5: Apply the SAS (Side-Angle-Side) Congruence Criterion.
+
+Conclusion: $\triangle ABC \cong \triangle BAD$.
+
+Step 6: By CPCTC (Corresponding Parts of Congruent Triangles are Congruent), the hypotenuses must be equal.
+
+Final Result: $|AC| = |BD|$. Q.E.D.
+
+4. Worked Examples
+
+Example 1.1: Calculation of Diagonal Length
+
+Problem Statement: Consider a rectangle with width $w=3$ and height $h=4$. Calculate the length of the diagonal $d$.
+
+Solution Steps:
+
+Identify the relationship: A rectangle contains right angles. Therefore, the diagonal divides the rectangle into two right-angled triangles. We can use the Pythagorean Theorem.
+
+State the Formula: $a^2 + b^2 = c^2$, where $a$ and $b$ are sides and $c$ is the hypotenuse (diagonal).
+
+Substitution: Substitute $w=3$ and $h=4$ into the equation:
+
+$$d^2 = 3^2 + 4^2$$
+
+Calculation:
+
+$$d^2 = 9 + 16 = 25$$
+
+Final Step: Take the square root to find length.
+
+$$d = \sqrt{25} = 5$$
+
+Answer: The diagonal length is 5 units.
+
+[ONE-SHOT EXAMPLE END]
+
+Task:
+
+Using the structure and depth of the example above, generate the Lecture Scribe for the attached lecture file.
+
+You must write the full content in Markdown. 

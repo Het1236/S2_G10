@@ -1,0 +1,385 @@
+\documentclass[11pt]{article}
+
+\usepackage{amsmath, amssymb}
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{titlesec}
+\usepackage{hyperref}
+
+\geometry{margin=1in}
+\setstretch{1.1}
+
+\titleformat{\section}
+  {\normalfont\Large\bfseries}{\thesection}{1em}{}
+
+\titleformat{\subsection}
+  {\normalfont\large\bfseries}{\thesubsection}{1em}{}
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Header
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{center}
+{\large \textbf{CSE 400 : Fundamentals of Probability in Computing}}\\
+\vspace{0.3cm}
+Nidhi Mehta – AU2440019\\
+January 29, 2026
+\end{center}
+
+\vspace{0.5cm}
+
+\begin{center}
+{\LARGE \textbf{Lecture Scribe}}\\[0.2cm]
+{\large Lecture 8: Gaussian, Uniform, Exponential, and Gamma Random Variables}
+\end{center}
+
+\vspace{0.8cm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Gaussian Random Variable}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{1. Definition and Properties}
+
+\textbf{Definition 1.1 (Gaussian Random Variable)}
+
+A Gaussian random variable is one whose PDF can be written as:
+
+\[
+f_X(x) =
+\frac{1}{\sqrt{2\pi\sigma^2}}
+\exp\left(
+-\frac{(x-m)^2}{2\sigma^2}
+\right)
+\]
+
+where:
+
+\begin{itemize}
+    \item $m$ = mean
+    \item $\sigma^2$ = variance
+    \item $\sigma$ = standard deviation
+\end{itemize}
+
+We denote:
+
+\[
+X \sim \mathcal{N}(m,\sigma^2)
+\]
+
+\subsection*{Interpretation}
+
+\begin{itemize}
+    \item Bell-shaped curve
+    \item Symmetric about mean $m$
+    \item Total area under curve = 1
+    \item CDF is S-shaped and monotonically increasing
+\end{itemize}
+
+\subsection*{Properties}
+
+1. Symmetry:
+\[
+f_X(m+a) = f_X(m-a)
+\]
+
+2. Mean:
+\[
+E[X] = m
+\]
+
+3. Variance:
+\[
+\text{Var}(X) = \sigma^2
+\]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section*{Standard Forms}
+
+\subsection*{Error Function}
+
+\[
+\text{erf}(x) =
+\frac{2}{\sqrt{\pi}}
+\int_0^x e^{-t^2} dt
+\]
+
+\subsection*{Complementary Error Function}
+
+\[
+\text{erfc}(x)
+=
+1 - \text{erf}(x)
+=
+\frac{2}{\sqrt{\pi}}
+\int_x^\infty e^{-t^2} dt
+\]
+
+\subsection*{$\Phi$-Function (CDF of Standard Normal)}
+
+\[
+\Phi(x)
+=
+\frac{1}{\sqrt{2\pi}}
+\int_{-\infty}^{x}
+e^{-t^2/2} dt
+\]
+
+\subsection*{$Q$-Function (Gaussian Tail Function)}
+
+\[
+Q(x)
+=
+\frac{1}{\sqrt{2\pi}}
+\int_x^\infty
+e^{-t^2/2} dt
+\]
+
+\subsection*{Key Identity}
+
+\[
+Q(x) = 1 - \Phi(x)
+\]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section*{Relation Between $\Phi$ and $Q$}
+
+\subsection*{Evaluating the CDF}
+
+\[
+F_X(x)
+=
+\int_{-\infty}^{x}
+\frac{1}{\sqrt{2\pi\sigma^2}}
+\exp
+\left(
+-\frac{(y-m)^2}{2\sigma^2}
+\right)
+dy
+\]
+
+Substitute:
+
+\[
+t = \frac{y-m}{\sigma}
+\]
+
+Then:
+
+\[
+F_X(x)
+=
+\Phi
+\left(
+\frac{x-m}{\sigma}
+\right)
+\]
+
+\subsection*{Tail Probability}
+
+\[
+\Pr(X > x)
+=
+Q
+\left(
+\frac{x-m}{\sigma}
+\right)
+\]
+
+\subsection*{Key Identities}
+
+\[
+Q(x) = 1 - \Phi(x)
+\]
+
+\[
+F_X(x)
+=
+1 -
+Q
+\left(
+\frac{x-m}{\sigma}
+\right)
+\]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section*{Worked Example}
+
+Given:
+
+\[
+f_X(x)
+=
+\frac{1}{\sqrt{8\pi}}
+\exp
+\left(
+-\frac{(x+3)^2}{8}
+\right)
+\]
+
+\subsection*{Step 1: Identify Mean and Variance}
+
+Compare with:
+
+\[
+f_X(x)=
+\frac{1}{\sqrt{2\pi\sigma^2}}
+\exp
+\left(
+-\frac{(x-m)^2}{2\sigma^2}
+\right)
+\]
+
+We identify:
+
+\[
+m = -3
+\]
+
+\[
+2\sigma^2 = 8
+\]
+
+\[
+\sigma^2 = 4
+\]
+
+\[
+\sigma = 2
+\]
+
+\subsection*{1) $\Pr(X \le 0)$}
+
+\[
+\Pr(X \le 0)
+=
+F_X(0)
+=
+\Phi
+\left(
+\frac{0-(-3)}{2}
+\right)
+=
+\Phi
+\left(
+\frac{3}{2}
+\right)
+=
+1 -
+Q
+\left(
+\frac{3}{2}
+\right)
+\]
+
+\subsection*{2) $\Pr(X > 4)$}
+
+\[
+\Pr(X > 4)
+=
+Q
+\left(
+\frac{4-(-3)}{2}
+\right)
+=
+Q
+\left(
+\frac{7}{2}
+\right)
+\]
+
+(Other parts follow same standardization method.)
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section*{Summary Section}
+
+\subsection*{Key Flashcard Concepts}
+
+\begin{itemize}
+    \item Gaussian $\rightarrow$ Bell shape
+    \item Mean $\rightarrow$ Center
+    \item Variance $\rightarrow$ Spread
+    \item $\Phi$ $\rightarrow$ Left tail
+    \item $Q$ $\rightarrow$ Right tail
+    \item Standardization $\rightarrow$ Subtract mean, divide by $\sigma$
+\end{itemize}
+
+\subsection*{Core Formulas}
+
+\[
+f_X(x)=
+\frac{1}{\sqrt{2\pi\sigma^2}}
+e^{-(x-m)^2/2\sigma^2}
+\]
+
+\[
+F_X(x)=
+\Phi
+\left(
+\frac{x-m}{\sigma}
+\right)
+\]
+
+\[
+\Pr(X>x)=
+Q
+\left(
+\frac{x-m}{\sigma}
+\right)
+\]
+
+\[
+Q(x)=1-\Phi(x)
+\]
+
+\subsection*{What To Absorb}
+
+\begin{itemize}
+    \item Always standardize before applying tables
+    \item Use $\Phi$ for left probability
+    \item Use $Q$ for right probability
+    \item Identify mean and variance correctly
+\end{itemize}
+
+\subsection*{Applications in Exams}
+
+\begin{itemize}
+    \item Probability evaluation
+    \item Noise modeling
+    \item Signal detection
+    \item Statistical modeling
+\end{itemize}
+
+\subsection*{Tricks}
+
+\begin{itemize}
+    \item “Greater than” $\rightarrow$ Use $Q$
+    \item “Less than” $\rightarrow$ Use $\Phi$
+    \item If PDF has $(x+a)^2$ $\rightarrow$ Mean is $-a$
+\end{itemize}
+
+\subsection*{Be Careful}
+
+\begin{itemize}
+    \item Do not confuse $\sigma$ and $\sigma^2$
+    \item Don’t forget negative sign inside square
+    \item Always standardize properly
+    \item $Q(x) \neq \Phi(x)$
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
