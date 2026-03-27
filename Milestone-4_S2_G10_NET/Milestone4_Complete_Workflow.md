@@ -128,9 +128,9 @@ flowchart TD
 2. `sys.stdout` is reconfigured to UTF-8 encoding (Windows fix)
 3. `PROJECT_ROOT` is set to the directory where [main.py](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/Milestone-4_S2_G10_NET/main.py) lives
 4. `sys.path.insert(0, PROJECT_ROOT)` tells Python to look in the current directory for imports
-5. All 5 modules are imported: [NetworkTopology](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/code/src/network_topology.py#18-334), [ProbabilisticAttackSimulator](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/Milestone-4_S2_G10_NET/attack_simulator.py#39-220), [PSOTraceback](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/Milestone-4_S2_G10_NET/pso_traceback.py#51-456), [PerformanceEvaluator](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/Milestone-4_S2_G10_NET/performance_metrics.py#20-271), [M4Visualizer](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/Milestone-4_S2_G10_NET/visualization.py#28-383)
+5. All 5 modules are imported: [NetworkTopology](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/Milestone-4_S2_G10_NET/network_topology.py), [ProbabilisticAttackSimulator](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/Milestone-4_S2_G10_NET/attack_simulator.py#L39-L219), [PSOTraceback](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/Milestone-4_S2_G10_NET/pso_traceback.py#L51-L455), [PerformanceEvaluator](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/Milestone-4_S2_G10_NET/performance_metrics.py#L20-L270), [M4Visualizer](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/Milestone-4_S2_G10_NET/visualization.py#L28-L382)
 6. `argparse` parses command-line flags (`--verbose` or `--quiet`)
-7. [setup_directories()](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/Milestone-4_S2_G10_NET/main.py#46-58) creates `data/`, `data/attack_logs/`, [results/](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/Milestone-4_S2_G10_NET/performance_metrics.py#52-121), `results/figures/`
+7. [setup_directories()](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/Milestone-4_S2_G10_NET/main.py#L46-L58) creates `data/`, `data/attack_logs/`, `results/`, `results/figures/`
 8. A welcome banner is printed with the date/time
 
 **Data produced:** Output directory structure created on disk.
@@ -139,11 +139,11 @@ flowchart TD
 
 ### STEP 1: Create Network Topology (REUSED from M3)
 
-**File:** [network_topology.py](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/Milestone-4_S2_G10_NET/network_topology.py) → Class [NetworkTopology](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/code/src/network_topology.py#18-334)
+**File:** [network_topology.py](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/Milestone-4_S2_G10_NET/network_topology.py) → Class [NetworkTopology](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/Milestone-4_S2_G10_NET/network_topology.py)
 
 **What happens in detail:**
 
-This step is **identical** to M3. The [NetworkTopology](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/code/src/network_topology.py#18-334) class builds a directed graph (`nx.DiGraph`) with 24 devices arranged in 4 LANs.
+This step is **identical** to M3. The [NetworkTopology](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/Milestone-4_S2_G10_NET/network_topology.py) class builds a directed graph (`nx.DiGraph`) with 24 devices arranged in 4 LANs.
 
 #### 1a. Create 4 LANs
 
@@ -185,14 +185,14 @@ host9 ─┘                                    └─ router7 ─ router4 ─ s
 ```
 
 **Data produced:**
-- [NetworkTopology](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/code/src/network_topology.py#18-334) object with `graph` (DiGraph), `nodes` dict, `attack_sources` list, `victim` string
+- [NetworkTopology](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/Milestone-4_S2_G10_NET/network_topology.py) object with `graph` (DiGraph), `nodes` dict, `attack_sources` list, `victim` string
 - `data/network_config.json` file
 
 ---
 
 ### STEP 2: Simulate DDoS Attack with Probabilistic Sampling
 
-**File:** [attack_simulator.py](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/Milestone-4_S2_G10_NET/attack_simulator.py) → Classes [Packet](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/Milestone-4_S2_G10_NET/attack_simulator.py#29-37), [ProbabilisticAttackSimulator](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/Milestone-4_S2_G10_NET/attack_simulator.py#39-219)
+**File:** [attack_simulator.py](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/Milestone-4_S2_G10_NET/attack_simulator.py) → Classes [Packet](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/Milestone-4_S2_G10_NET/attack_simulator.py#L29-L37), [ProbabilisticAttackSimulator](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/Milestone-4_S2_G10_NET/attack_simulator.py#L39-L219)
 
 **This is the FIRST major change from M3.** Instead of logging every packet, we now randomly sample only 3%.
 
@@ -212,9 +212,9 @@ simulator = ProbabilisticAttackSimulator(
 
 **This is fundamentally different from M3:** M3 had no randomness at all.
 
-#### 2b. Generate and Route Packets ([simulate_ddos_attack](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/Milestone-4_S2_G10_NET/attack_simulator.py#68-152))
+#### 2b. Generate and Route Packets ([simulate_ddos_attack](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/Milestone-4_S2_G10_NET/attack_simulator.py#L68-L152))
 
-For each of the 9 attack sources, generates 200 packets (1800 total). Each [Packet](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/Milestone-4_S2_G10_NET/attack_simulator.py#29-37) is a Python dataclass:
+For each of the 9 attack sources, generates 200 packets (1800 total). Each [Packet](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/Milestone-4_S2_G10_NET/attack_simulator.py#L29-L37) is a Python dataclass:
 
 ```python
 @dataclass
@@ -247,7 +247,7 @@ if np.random.random() < self.p:     # self.p = 0.03
 
 **The mathematics behind this:**
 - Each packet is an independent Bernoulli trial: `S_i ~ Bernoulli(p = 0.03)`
-- [P(Sampled) = 0.03](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/context/m4_attack_simulator.py#20-29), [P(Not Sampled) = 0.97](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/context/m4_attack_simulator.py#20-29)
+- `P(Sampled) = 0.03`, `P(Not Sampled) = 0.97`
 - The **total** number of sampled packets follows: `N ~ Binomial(n=1800, p=0.03)`
 - Expected value: `E[N] = n × p = 1800 × 0.03 = 54 packets`
 - Standard deviation: `σ = √(n × p × (1-p)) = √(1800 × 0.03 × 0.97) = 7.24`
@@ -262,7 +262,7 @@ if np.random.random() < self.p:     # self.p = 0.03
 | `router_logs` size | Every packet at every router | Only sampled packets |
 | Variance | 0 | σ² = np(1-p) = 52.38 |
 
-#### 2d. Sampling Statistics ([get_sampling_statistics](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/Milestone-4_S2_G10_NET/attack_simulator.py#185-218))
+#### 2d. Sampling Statistics ([get_sampling_statistics](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/Milestone-4_S2_G10_NET/attack_simulator.py#L185-L218))
 
 After simulation, computes detailed statistics to validate M2's predictions:
 
@@ -283,13 +283,13 @@ After simulation, computes detailed statistics to validate M2's predictions:
 }
 ```
 
-#### 2e. Save Logs ([save_attack_logs](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/Milestone-4_S2_G10_NET/attack_simulator.py#162-183))
+#### 2e. Save Logs ([save_attack_logs](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/Milestone-4_S2_G10_NET/attack_simulator.py#L162-L183))
 
 Saves per-router sampled packet logs as JSON files (e.g., `router8_sampled_log.json`) and an `attack_summary.json`.
 
 **Data produced:**
 - `simulator.router_logs` — dictionary mapping each router to sampled packet records only
-- `simulator.packets` — list of 1800 Packet objects with [sampled](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/context/m4_attack_simulator.py#145-148) field
+- `simulator.packets` — list of 1800 Packet objects with `sampled` field
 - `attack_stats` — dictionary with total, sampled, rate, expected, variance
 - `data/attack_logs/*.json` files
 
@@ -297,7 +297,7 @@ Saves per-router sampled packet logs as JSON files (e.g., `router8_sampled_log.j
 
 ### STEP 3: PSO-Based IP Traceback (THE CORE ALGORITHM)
 
-**File:** [pso_traceback.py](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/Milestone-4_S2_G10_NET/pso_traceback.py) → Classes [Particle](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/Milestone-4_S2_G10_NET/pso_traceback.py#32-48), [PSOTraceback](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/Milestone-4_S2_G10_NET/pso_traceback.py#51-455)
+**File:** [pso_traceback.py](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/Milestone-4_S2_G10_NET/pso_traceback.py) → Classes [Particle](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/Milestone-4_S2_G10_NET/pso_traceback.py#L32-L48), [PSOTraceback](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/Milestone-4_S2_G10_NET/pso_traceback.py#L51-L455)
 
 **This is the SECOND major change from M3.** Instead of greedy shortest-path, we use Particle Swarm Optimization.
 
@@ -323,7 +323,7 @@ class Particle:
     pbest_fitness: float     # Fitness of personal best
 ```
 
-#### 3c. Initialize PSO ([__init__](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/Milestone-4_S2_G10_NET/pso_traceback.py#59-104))
+#### 3c. Initialize PSO ([__init__](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/Milestone-4_S2_G10_NET/pso_traceback.py#L59-L104))
 
 ```python
 pso = PSOTraceback(
@@ -338,7 +338,7 @@ pso = PSOTraceback(
 )
 ```
 
-**What [router_counts](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/context/m4_attack_simulator.py#149-152) looks like** (from Step 2):
+**What `router_counts` looks like** (from Step 2):
 ```python
 {
     'router1': 12,    # 12 sampled packets passed through router1
@@ -351,7 +351,7 @@ pso = PSOTraceback(
 }
 ```
 
-#### 3d. Initialize Particles ([initialize_particles](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/Milestone-4_S2_G10_NET/pso_traceback.py#142-187))
+#### 3d. Initialize Particles ([initialize_particles](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/Milestone-4_S2_G10_NET/pso_traceback.py#L142-L187))
 
 For each of the 30 particles:
 1. Compute the **shortest path** from source to victim using Dijkstra
@@ -374,7 +374,7 @@ for i in range(self.num_particles):
 
 #### 3e. The Fitness Function: Coverage Percentage (Paper Equation 3)
 
-[calculate_coverage(path)](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/Milestone-4_S2_G10_NET/pso_traceback.py#106-140) computes how well a path explains the sampled packet data:
+[calculate_coverage(path)](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/Milestone-4_S2_G10_NET/pso_traceback.py#L106-L140) computes how well a path explains the sampled packet data:
 
 ```
                      Average sampled packets per router hop
@@ -408,7 +408,7 @@ def calculate_coverage(self, path):
 
 #### 3f. PSO Velocity Update (Paper Equation 1)
 
-[update_velocity(particle)](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/Milestone-4_S2_G10_NET/pso_traceback.py#220-250) implements:
+[update_velocity(particle)](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/Milestone-4_S2_G10_NET/pso_traceback.py#L220-L250) implements:
 
 ```
 v_i(t+1) = w·v_i(t) + c1·r1·(Pbest_i - x_i(t)) + c2·r2·(Pgbest - x_i(t))
@@ -432,7 +432,7 @@ new_velocity = np.clip(new_velocity, -5.0, 5.0)  # Clamp to prevent explosion
 
 #### 3g. PSO Position Update (Paper Equation 2)
 
-[update_position(particle, source, victim)](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/Milestone-4_S2_G10_NET/pso_traceback.py#252-286) translates velocity into a new path:
+[update_position(particle, source, victim)](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/Milestone-4_S2_G10_NET/pso_traceback.py#L252-L286) translates velocity into a new path:
 
 ```python
 if particle.velocity > 0.5:
@@ -452,7 +452,7 @@ This maps the continuous velocity value to discrete network path operations.
 
 #### 3h. Oscillation Detection (Paper Equation 7)
 
-[detect_oscillation(fitness_history)](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/Milestone-4_S2_G10_NET/pso_traceback.py#307-329) checks if the swarm is stuck:
+[detect_oscillation(fitness_history)](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/Milestone-4_S2_G10_NET/pso_traceback.py#L307-L329) checks if the swarm is stuck:
 
 ```python
 # If the last 'α' fitness changes are all < δ', we're oscillating
@@ -462,7 +462,7 @@ oscillating = all(change < self.oscillation_threshold for change in changes)
 
 Where `α = 3` (count limit) and `δ' = 0.001` (threshold).
 
-#### 3i. The Main PSO Loop ([trace_attack_source](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/Milestone-4_S2_G10_NET/pso_traceback.py#331-421))
+#### 3i. The Main PSO Loop ([trace_attack_source](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/Milestone-4_S2_G10_NET/pso_traceback.py#L331-L421))
 
 For **each** of the 9 suspected attack sources:
 
@@ -495,7 +495,7 @@ for iteration in range(500):          # Max 500 iterations
             break  # Converged!
 ```
 
-#### 3j. Tracing All 9 Sources ([trace_all_attacks](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/Milestone-4_S2_G10_NET/pso_traceback.py#423-455))
+#### 3j. Tracing All 9 Sources ([trace_all_attacks](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/Milestone-4_S2_G10_NET/pso_traceback.py#L423-L455))
 
 For each of the 9 attack sources, the global best is reset and a fresh PSO run is performed:
 
@@ -532,11 +532,11 @@ Each result contains:
 
 ### STEP 4: Evaluate Performance (M3 vs M4)
 
-**File:** [performance_metrics.py](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/Milestone-4_S2_G10_NET/performance_metrics.py) → Class [PerformanceEvaluator](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/Milestone-4_S2_G10_NET/performance_metrics.py#20-270)
+**File:** [performance_metrics.py](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/Milestone-4_S2_G10_NET/performance_metrics.py) → Class [PerformanceEvaluator](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/Milestone-4_S2_G10_NET/performance_metrics.py#L20-L270)
 
 #### 4a. Initialize with M3 Baseline
 
-The evaluator stores M3's known results ([__init__](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/Milestone-4_S2_G10_NET/performance_metrics.py#29-50)):
+The evaluator stores M3's known results ([__init__](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/Milestone-4_S2_G10_NET/performance_metrics.py#L29-L50)):
 
 ```python
 self.m3_baseline = {
@@ -559,7 +559,7 @@ self.m2_predictions = {
 }
 ```
 
-#### 4b. Calculate All M4 Metrics ([evaluate_m4_results](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/Milestone-4_S2_G10_NET/performance_metrics.py#52-120))
+#### 4b. Calculate All M4 Metrics ([evaluate_m4_results](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/Milestone-4_S2_G10_NET/performance_metrics.py#L52-L120))
 
 Computes 5 categories of metrics:
 
@@ -598,7 +598,7 @@ memory_savings_percent = (1 - sampled_packets / 1800) * 100  # ~96.8%
 reduction_factor = 1800 / sampled_packets                     # ~31x
 ```
 
-#### 4c. Generate M3 vs M4 Comparison ([compare_m3_vs_m4](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/Milestone-4_S2_G10_NET/performance_metrics.py#122-161), [generate_comparison_table](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/Milestone-4_S2_G10_NET/performance_metrics.py#163-211))
+#### 4c. Generate M3 vs M4 Comparison ([compare_m3_vs_m4](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/Milestone-4_S2_G10_NET/performance_metrics.py#L122-L161), [generate_comparison_table](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/Milestone-4_S2_G10_NET/performance_metrics.py#L163-L211))
 
 Creates a pandas DataFrame comparing all metrics:
 
@@ -625,11 +625,11 @@ Creates a pandas DataFrame comparing all metrics:
 
 ### STEP 5: Generate Visualizations
 
-**File:** [visualization.py](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/Milestone-4_S2_G10_NET/visualization.py) → Class [M4Visualizer](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/Milestone-4_S2_G10_NET/visualization.py#28-382)
+**File:** [visualization.py](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/Milestone-4_S2_G10_NET/visualization.py) → Class [M4Visualizer](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/Milestone-4_S2_G10_NET/visualization.py#L28-L382)
 
 Creates **4 publication-quality figures** using matplotlib and seaborn.
 
-#### Figure 1: PSO Convergence Plot ([plot_pso_convergence](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/Milestone-4_S2_G10_NET/visualization.py#75-131))
+#### Figure 1: PSO Convergence Plot ([plot_pso_convergence](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/Milestone-4_S2_G10_NET/visualization.py#L75-L131))
 
 Two panels:
 - **Left:** Fitness (coverage %) vs iteration for each attack source — shows how quickly PSO converges
@@ -637,7 +637,7 @@ Two panels:
 
 ![PSO convergence curves and convergence speed per source](C:/Users/hetpa/.gemini/antigravity/brain/e97441b9-048d-4aeb-98a7-6afc1a1dd7a9/pso_convergence.png)
 
-#### Figure 2: M3 vs M4 Accuracy Comparison ([plot_m3_vs_m4_accuracy](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/Milestone-4_S2_G10_NET/visualization.py#133-233))
+#### Figure 2: M3 vs M4 Accuracy Comparison ([plot_m3_vs_m4_accuracy](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/Milestone-4_S2_G10_NET/visualization.py#L133-L233))
 
 Four panels (the most important figure):
 - **Top-left:** Accuracy comparison bar chart (M3: 100% vs M4: ~100%)
@@ -647,7 +647,7 @@ Four panels (the most important figure):
 
 ![M3 vs M4 accuracy, packets, coverage, and summary table](C:/Users/hetpa/.gemini/antigravity/brain/e97441b9-048d-4aeb-98a7-6afc1a1dd7a9/m3_vs_m4_accuracy.png)
 
-#### Figure 3: Sampling Distribution ([plot_sampling_distribution](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/Milestone-4_S2_G10_NET/visualization.py#235-286))
+#### Figure 3: Sampling Distribution ([plot_sampling_distribution](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/Milestone-4_S2_G10_NET/visualization.py#L235-L286))
 
 Two panels:
 - **Left:** Theoretical `Binomial(1800, 0.03)` PMF with E[N]=54 marked, actual sampled count marked, and 95% CI bounds — validates M2's predictions
@@ -655,7 +655,7 @@ Two panels:
 
 ![Binomial distribution validation and sampling pie chart](C:/Users/hetpa/.gemini/antigravity/brain/e97441b9-048d-4aeb-98a7-6afc1a1dd7a9/sampling_distribution.png)
 
-#### Figure 4: Particle Evolution ([plot_particle_evolution](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/Milestone-4_S2_G10_NET/visualization.py#288-346))
+#### Figure 4: Particle Evolution ([plot_particle_evolution](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/Milestone-4_S2_G10_NET/visualization.py#L288-L346))
 
 Two panels:
 - **Left:** Scatter plot of iterations vs coverage per source — shows PSO efficiency per attack origin
@@ -689,11 +689,11 @@ flowchart LR
 |-----------|---------------|------------|
 | NetworkTopology → AttackSimulator | `network.graph` (DiGraph) | Simulator needs the graph to route packets and find shortest paths |
 | NetworkTopology → PSOTraceback | `network.graph` (DiGraph) | PSO needs the graph to explore paths |
-| AttackSimulator → PSOTraceback | [router_counts](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/context/m4_attack_simulator.py#149-152) (dict), `total_sampled` (int) | PSO uses sampled packet counts at routers to calculate fitness (coverage) |
+| AttackSimulator → PSOTraceback | `router_counts` (dict), `total_sampled` (int) | PSO uses sampled packet counts at routers to calculate fitness (coverage) |
 | AttackSimulator → PerformanceEvaluator | `attack_stats` (dict) | Evaluator needs sampling statistics for memory/accuracy comparison |
 | PSOTraceback → PerformanceEvaluator | `pso_results` (list of 9 dicts) | Evaluator measures accuracy, coverage, convergence from PSO output |
 | PSOTraceback → M4Visualizer | `pso_results` | Visualizer needs convergence history and paths for figures |
-| PerformanceEvaluator → M4Visualizer | `m4_metrics`, [comparison](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/code/src/visualization.py#242-339) | Visualizer needs metrics for comparison charts and tables |
+| PerformanceEvaluator → M4Visualizer | `m4_metrics`, `comparison` | Visualizer needs metrics for comparison charts and tables |
 | AttackSimulator → M4Visualizer | `attack_stats` | Visualizer needs sampling stats for distribution plot |
 
 ---
@@ -810,10 +810,10 @@ python main.py --quiet      # Minimal output
 
 | Component | M3 (Deterministic) | M4 (Probabilistic + PSO) |
 |-----------|-------|--------|
-| **Packet class** | 7 fields (`packet_id`, `source_ip`, `dest_ip`, `source_node`, `dest_node`, `timestamp`, [path](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/context/m4_pso_traceback.py#279-283)) | 6 fields + `sampled: bool` ⭐ |
+| **Packet class** | 7 fields (`packet_id`, `source_ip`, `dest_ip`, `source_node`, `dest_node`, `timestamp`, `path`) | 6 fields + `sampled: bool` ⭐ |
 | **Logging condition** | `for router in path: log(packet)` (always) | `if np.random.random() < 0.03: log(packet)` |
 | **Traceback algorithm** | `nx.shortest_path()` (one call, instant) | PSO: 30 particles × 500 max iterations |
-| **Traceback class** | `GreedyTraceback` | [PSOTraceback](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/Milestone-4_S2_G10_NET/pso_traceback.py#51-456) with [Particle](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/context/m4_pso_traceback.py#23-40) dataclass |
+| **Traceback class** | `GreedyTraceback` | [PSOTraceback](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/Milestone-4_S2_G10_NET/pso_traceback.py#L51-L455) with [Particle](file:///c:/Users/hetpa/OneDrive%20-%20Ahmedabad%20University/Desktop/Submissions%202025/SEM-4/CSE400/S2_G10/S2_G10/Milestone-4_S2_G10_NET/pso_traceback.py#L32-L48) dataclass |
 | **Coverage formula** | Same equation, but total = 1800 | Same equation, but total = ~54 (sampled) |
 | **Performance evaluator** | Compares M2 vs M3 | Compares M3 vs M4 + validates M2 |
 | **Visualizations** | 6 figures (network, packets, coverage, M2-vs-M3, paths, dashboard) | 4 figures (convergence, M3-vs-M4, sampling, evolution) |
