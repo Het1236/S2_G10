@@ -1,0 +1,484 @@
+\documentclass[12pt, a4paper]{article}
+
+% ── Packages ────────────────────────────────────────────────────────────────
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{xcolor}
+\usepackage{mdframed}
+\usepackage{tcolorbox}
+\usepackage{microtype}
+\usepackage{parskip}
+
+% ── Colours ──────────────────────────────────────────────────────────────────
+\definecolor{accentblue}{RGB}{0, 70, 140}
+\definecolor{lightgray}{RGB}{245, 245, 245}
+\definecolor{warnorange}{RGB}{200, 80, 0}
+
+% ── Section formatting ───────────────────────────────────────────────────────
+\titleformat{\section}{\large\bfseries\color{accentblue}}{}{0em}
+  {\thesection\quad}[\titlerule]
+\titleformat{\subsection}{\normalsize\bfseries\color{accentblue}}{}{0em}
+  {\thesubsection\quad}
+
+% ── Header / Footer ──────────────────────────────────────────────────────────
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{\small CSE400 -- Probability \& Computing}
+\lhead{\small Lecture 23 Scribe}
+\cfoot{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% ── Theorem-like environments ────────────────────────────────────────────────
+\tcbuselibrary{theorems, skins, breakable}
+
+\newtcbtheorem[number within=section]{defn}{Definition}%
+  {colback=blue!5, colframe=accentblue, fonttitle=\bfseries,
+   breakable}{def}
+
+\newtcbtheorem[number within=section]{thm}{Theorem}%
+  {colback=green!5, colframe=green!50!black, fonttitle=\bfseries,
+   breakable}{thm}
+
+\newtcbtheorem[number within=section]{exmp}{Example}%
+  {colback=orange!5, colframe=warnorange, fonttitle=\bfseries,
+   breakable}{ex}
+
+% ── Macros ────────────────────────────────────────────────────────────────────
+\newcommand{\EX}[1]{E\!\left[#1\right]}
+\newcommand{\MGF}{M_X(t)}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\begin{document}
+
+% ── Title block ───────────────────────────────────────────────────────────────
+\begin{center}
+  {\LARGE\bfseries\color{accentblue}
+    Predicting the Impossible:\\[4pt]
+    Tail Bounds and System Reliability}\\[10pt]
+  {\large\bfseries Case Study: Amazon Black Friday Sale 2026}\\[8pt]
+  \rule{0.6\linewidth}{0.8pt}\\[6pt]
+  \begin{tabular}{rl}
+    \textbf{Course:}      & CSE400 -- Probability \& Computing \\
+    \textbf{Instructor:}  & Dr.\ Dhaval Patel                  \\
+    \textbf{Institution:} & Ahmedabad University               \\
+    \textbf{Lecture:}     & 23                                 \\
+    \textbf{Date:}        & April 02, 2026                     \\
+  \end{tabular}
+\end{center}
+
+\vspace{8pt}
+
+% ── Table of Contents ─────────────────────────────────────────────────────────
+\tableofcontents
+\newpage
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Introduction: Amazon Black Friday Sale and Uncertainty}
+% ─────────────────────────────────────────────────────────────────────────────
+
+The lecture introduces a real-world computing reliability problem using the Amazon Black Friday
+sale. The expected timeline is:
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Early Deals:} Nov 20--21, 2026
+  \item \textbf{Main Sale:} Nov 25--27, 2026
+  \item \textbf{Cyber Monday:} Nov 30, 2026
+\end{itemize}
+
+During such events, massive traffic spikes occur. The goal of the system architect is to answer:
+
+\begin{tcolorbox}[colback=lightgray, colframe=accentblue, title=Core Question]
+  \textit{What is the probability that incoming requests exceed the system capacity?}
+  \[
+    P(X \geq k)
+  \]
+\end{tcolorbox}
+
+This question leads to the study of \textbf{tail probabilities}.
+
+\begin{defn}{System Failure Event}{sfe}
+  A system failure occurs when incoming requests exceed the system capacity:
+  \[
+    X \geq k
+  \]
+  where $X$ is the number of incoming requests and $k$ is the system threshold
+  (maximum sustainable load). This is called a \textbf{tail probability} because
+  it corresponds to the right tail of the distribution.
+\end{defn}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Modeling Datacenter Traffic with Probability}
+% ─────────────────────────────────────────────────────────────────────────────
+
+A datacenter receives jobs across multiple servers $S_1, S_2, S_3, S_4$. Job arrivals
+occur randomly, and some servers may receive $\geq k$ jobs. This traffic behaviour is
+modelled using a \textbf{Poisson process}.
+
+\begin{defn}{Poisson Arrival Model}{pam}
+  A Poisson random variable models the number of events occurring in a fixed interval:
+  \[
+    P(X = k) = \frac{e^{-\lambda}\,\lambda^{k}}{k!}
+  \]
+  where $\lambda$ is the average arrival rate and $k$ is the number of arrivals.
+\end{defn}
+
+\begin{exmp}{Traffic Burst}{tb}
+  \textbf{Condition:} System receives $\geq k$ jobs within one hour.\\
+  \textbf{Probability of interest:} $P(X \geq k)$. This is the \emph{tail probability}.
+\end{exmp}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Understanding Tail Events}
+% ─────────────────────────────────────────────────────────────────────────────
+
+A simulated server traffic graph uses the following parameters:
+\begin{itemize}[leftmargin=2em]
+  \item Poisson arrival rate: $\lambda = 50$
+  \item Crash threshold: $k = 60$
+\end{itemize}
+
+\begin{tcolorbox}[colback=red!5, colframe=red!60!black, title=Key Observation]
+  \textbf{``The mean is safe. The tail is catastrophic.''}
+\end{tcolorbox}
+
+Even though the mean is within safe limits, rare spikes cause crashes.
+
+\medskip
+\textbf{Observed Metrics (simulation duration: 1000 minutes):}
+\begin{itemize}[leftmargin=2em]
+  \item Crashes observed: 87
+  \item Crash rate: $\dfrac{87}{1000} = 8.7\%$
+\end{itemize}
+
+Before launching the system, engineers must compute $P(X \geq 60)$.
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{The Hierarchy of Probability Bounds}
+% ─────────────────────────────────────────────────────────────────────────────
+
+\begin{center}
+\begin{tabular}{cll}
+  \toprule
+  \textbf{Level} & \textbf{Bound}    & \textbf{Required Information} \\
+  \midrule
+  1              & Markov            & Mean $(\mu)$                  \\
+  2              & Chebyshev         & Mean $+$ Variance $(\mu,\sigma^2)$ \\
+  3              & Chernoff          & Moment Generating Function (MGF)   \\
+  \bottomrule
+\end{tabular}
+\end{center}
+
+\begin{tcolorbox}[colback=lightgray, colframe=accentblue]
+  \textit{The more information we know about a distribution, the tighter the bound becomes.}
+\end{tcolorbox}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Markov's Inequality}
+% ─────────────────────────────────────────────────────────────────────────────
+
+\begin{thm}{Markov's Inequality}{markov}
+  For any non-negative random variable $X$ and $a > 0$:
+  \[
+    P(X \geq a) \leq \frac{\EX{X}}{a}
+  \]
+\end{thm}
+
+This inequality provides an upper bound on tail probability using \emph{only} the mean.
+
+\begin{exmp}{System Load}{sl}
+  \textbf{Given:} Mean load $\EX{X} = 50$, crash threshold $a = 60$.
+
+  \textbf{Applying Markov's inequality:}
+  \[
+    P(X \geq 60) \leq \frac{50}{60} \approx 0.833
+  \]
+  The probability of failure is \textbf{at most 83.3\%}.
+\end{exmp}
+
+\medskip
+\textbf{Comparison:}
+\begin{center}
+\begin{tabular}{ll}
+  \toprule
+  \textbf{Method}  & \textbf{Probability} \\
+  \midrule
+  Exact            & 0.004  \\
+  Markov estimate  & 0.714  \\
+  \bottomrule
+\end{tabular}
+\end{center}
+
+Markov overestimates heavily because it uses only the mean.
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Chebyshev's Inequality}
+% ─────────────────────────────────────────────────────────────────────────────
+
+\begin{thm}{Chebyshev's Inequality}{cheb}
+  For any random variable with variance $\sigma^2$:
+  \[
+    P\!\left(|X - \mu| \geq a\right) \leq \frac{\sigma^2}{a^2}
+  \]
+  \textbf{Tail form:}
+  \[
+    P(X \geq \mu + t) \leq \frac{\sigma^2}{t^2}
+  \]
+\end{thm}
+
+\begin{exmp}{Chebyshev Applied to Server Load}{chebex}
+  \textbf{Parameters:} $\mu = 50$, $k = 60$, $t = k - \mu = 10$.
+
+  \textbf{Applying Chebyshev:}
+  \[
+    P(X \geq 60) \leq \frac{\sigma^2}{100}
+  \]
+  \textbf{Chebyshev estimate:} $0.125$
+\end{exmp}
+
+\medskip
+\textbf{Comparison:}
+\begin{center}
+\begin{tabular}{ll}
+  \toprule
+  \textbf{Method}    & \textbf{Probability} \\
+  \midrule
+  Exact              & 0.004  \\
+  Chebyshev estimate & 0.125  \\
+  \bottomrule
+\end{tabular}
+\end{center}
+
+Chebyshev is better than Markov but still loose.
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Chernoff Bound and Moment Generating Functions}
+% ─────────────────────────────────────────────────────────────────────────────
+
+The Chernoff bound uses the Moment Generating Function (MGF).
+
+\begin{defn}{Moment Generating Function}{mgf}
+  \[
+    M_X(t) = \EX{e^{tX}}
+  \]
+\end{defn}
+
+\begin{thm}{Chernoff Bound}{chernoff}
+  \[
+    P(X \geq a) \leq \min_{t > 0}\; e^{-ta}\,M_X(t)
+  \]
+  The Chernoff bound transforms the probability using exponential functions,
+  producing \textbf{exponentially decaying} bounds.
+\end{thm}
+
+\medskip
+\textbf{Comparison:}
+\begin{center}
+\begin{tabular}{ll}
+  \toprule
+  \textbf{Method} & \textbf{Probability} \\
+  \midrule
+  Exact           & 0.092 \\
+  Chernoff        & 0.391 \\
+  \bottomrule
+\end{tabular}
+\end{center}
+
+Chernoff produces the \textbf{tightest bound} among the three methods.
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Visualization of Tail Decay}
+% ─────────────────────────────────────────────────────────────────────────────
+
+Three types of decay are compared:
+
+\begin{center}
+\begin{tabular}{lll}
+  \toprule
+  \textbf{Bound}  & \textbf{Decay Type}  & \textbf{Rate}    \\
+  \midrule
+  Markov          & Linear decay         & $1/k$            \\
+  Chebyshev       & Polynomial decay     & $1/k^2$          \\
+  Chernoff        & Exponential decay    & $e^{-k}$         \\
+  \bottomrule
+\end{tabular}
+\end{center}
+
+\begin{tcolorbox}[colback=lightgray, colframe=accentblue, title=Key Insight]
+  Exponential decay reaches near-zero probability \textbf{much faster} than linear or
+  polynomial decay.
+\end{tcolorbox}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Case Study: Black Friday SLA Breach}
+% ─────────────────────────────────────────────────────────────────────────────
+
+A full 24-hour sale simulation uses the following parameters:
+\begin{itemize}[leftmargin=2em]
+  \item Average traffic: $\lambda = 500$
+  \item SLA crash threshold: $k = 600$
+\end{itemize}
+
+\textbf{Mission:} The architect must estimate $P(X \geq 600)$ \emph{before} launching the sale.
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Cost of Loose Probability Bounds}
+% ─────────────────────────────────────────────────────────────────────────────
+
+\textbf{Probability estimates compared:}
+\begin{center}
+\begin{tabular}{ll}
+  \toprule
+  \textbf{Method} & \textbf{Probability} \\
+  \midrule
+  Exact           & 1.4\%   \\
+  Chernoff        & 8.8\%   \\
+  Chebyshev       & 20\%    \\
+  Markov          & 90.9\%  \\
+  \bottomrule
+\end{tabular}
+\end{center}
+
+Markov suggests almost certain failure, which is \textbf{incorrect}. The waste multiplier
+is defined as:
+\[
+  \text{Waste} = \frac{\text{Bound Estimate}}{\text{Exact Probability}}
+\]
+
+\textbf{Financial over-provisioning waste:}
+\begin{center}
+\begin{tabular}{ll}
+  \toprule
+  \textbf{Method} & \textbf{Waste Multiplier} \\
+  \midrule
+  Chernoff        & $10.7\times$        \\
+  Chebyshev       & $6422\times$        \\
+  Markov          & $107039\times$      \\
+  \bottomrule
+\end{tabular}
+\end{center}
+
+\begin{tcolorbox}[colback=red!5, colframe=red!60!black]
+  \textbf{Poor probability bounds lead to massive financial waste.}
+\end{tcolorbox}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Choosing the Correct Tail Bound}
+% ─────────────────────────────────────────────────────────────────────────────
+
+\begin{center}
+\begin{tabular}{p{2.2cm} p{2.8cm} p{2cm} p{2.2cm} p{3.5cm}}
+  \toprule
+  \textbf{Method} & \textbf{Required Data} & \textbf{Tail Decay}
+    & \textbf{Tightness} & \textbf{Use Case} \\
+  \midrule
+  Markov      & Mean                    & $1/k$     & Very loose & Rough estimate \\[4pt]
+  Chebyshev   & Mean + Variance         & $1/k^2$   & Moderate   & Unknown distribution \\[4pt]
+  Chernoff    & Full MGF                & $e^{-k}$  & Tight      & Known models (Poisson, Binomial) \\
+  \bottomrule
+\end{tabular}
+\end{center}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Class Exercise: Bounding the Laplace Distribution}
+% ─────────────────────────────────────────────────────────────────────────────
+
+\textbf{Distribution:} $X \sim \mathrm{Laplace}(\mu, b)$ with $\sigma = b\sqrt{2}$.
+
+\textbf{Properties:}
+\begin{itemize}[leftmargin=2em]
+  \item Sharp central peak
+  \item Heavy tails
+\end{itemize}
+
+\textbf{Goal:} Apply the Chernoff bound with threshold $a = \mu + 3\sigma$.
+
+\subsection*{Derivation Blueprint}
+
+\begin{enumerate}[leftmargin=2em, label=\textbf{Step \arabic*.}]
+  \item \textbf{Compute MGF:}
+    \[
+      M_X(t) = \EX{e^{tX}}
+    \]
+  \item \textbf{Apply Chernoff inequality:}
+    \[
+      P(X \geq a) \leq e^{-ta}\,M_X(t)
+    \]
+  \item \textbf{Optimise:} Take derivative with respect to $t$, set it to zero, and solve
+        for the optimal $t^*$.
+  \item \textbf{Substitute} the optimal $t^*$ back into the bound.
+\end{enumerate}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Summary and Exam-Oriented Memory Guide}
+% ─────────────────────────────────────────────────────────────────────────────
+
+\subsection*{Key Concepts (Flashcard Style)}
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Tail Probability} $\longrightarrow$ $P(X \geq k)$
+  \item \textbf{System Reliability} $\longrightarrow$ Avoid overload
+  \item \textbf{Markov} $\longrightarrow$ Mean only
+  \item \textbf{Chebyshev} $\longrightarrow$ Mean $+$ Variance
+  \item \textbf{Chernoff} $\longrightarrow$ MGF
+  \item \textbf{Decay speed:} Linear $<$ Polynomial $<$ Exponential
+\end{itemize}
+
+\subsection*{Important Formulas}
+
+\begin{tcolorbox}[colback=lightgray, colframe=accentblue, title=Formula Sheet]
+  \textbf{Markov:}
+  \[
+    P(X \geq a) \leq \frac{\EX{X}}{a}
+  \]
+
+  \textbf{Chebyshev:}
+  \[
+    P(|X - \mu| \geq k) \leq \frac{\sigma^2}{k^2}
+  \]
+
+  \textbf{Chernoff:}
+  \[
+    P(X \geq a) \leq \min_{t > 0}\; e^{-ta}\,M_X(t)
+  \]
+
+  \textbf{Poisson distribution:}
+  \[
+    P(X = k) = \frac{e^{-\lambda}\,\lambda^k}{k!}
+  \]
+\end{tcolorbox}
+
+\subsection*{Applications in Systems}
+
+\begin{itemize}[leftmargin=2em]
+  \item Datacenter scaling
+  \item Network congestion
+  \item Cloud capacity planning
+  \item SLA reliability prediction
+  \item Cyber Monday traffic spikes
+\end{itemize}
+
+\subsection*{Formula Application Tricks}
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Markov} --- Use when only the mean is known.
+  \item \textbf{Chebyshev} --- Use when variance is known but the distribution is unknown.
+  \item \textbf{Chernoff} --- Use when the distribution is known (Poisson, Binomial).
+\end{itemize}
+
+\subsection*{Common Exam Mistakes}
+
+\begin{enumerate}[leftmargin=2em]
+  \item Using Markov when variance is available.
+  \item Forgetting that Chernoff requires the MGF.
+  \item Confusing $P(|X - \mu| \geq a)$ with $P(X \geq a)$.
+  \item Forgetting to optimise parameter $t$ in the Chernoff bound.
+  \item Misinterpreting bounds as exact probabilities.
+\end{enumerate}
+
+\end{document}
