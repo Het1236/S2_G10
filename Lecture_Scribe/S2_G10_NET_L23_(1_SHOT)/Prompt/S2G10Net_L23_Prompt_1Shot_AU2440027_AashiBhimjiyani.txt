@@ -1,0 +1,57 @@
+Example Lecture Scribe (structure only):
+
+Topic: Random Variables and Expectations
+
+Definition
+A random variable maps outcomes of an experiment to real numbers.
+Key Formula
+Expectation:
+𝐸
+[
+𝑋
+]
+=
+∑
+𝑥
+⋅
+𝑃
+(
+𝑋
+=
+𝑥
+)
+E[X]=∑x⋅P(X=x)
+Explanation
+Expectation represents the average outcome over many trials.
+Worked Example
+If 
+𝑋
+X takes values {1,2,3} with probabilities {0.2, 0.5, 0.3}:
+𝐸
+[
+𝑋
+]
+=
+1
+(
+0.2
+)
++
+2
+(
+0.5
+)
++
+3
+(
+0.3
+)
+=
+2.1
+E[X]=1(0.2)+2(0.5)+3(0.3)=2.1
+Insight
+Expectation does not indicate the most likely value, but the long-run average.
+
+Instruction:
+
+Using the same structure, generate a lecture scribe for the provided lecture (Amazon Black Friday Sale 2026 case study on tail bounds and system reliability). The scribe should function as exam reference material and include all key definitions, formulas (Markov, Chebyshev, Chernoff), derivations, comparisons, and worked examples exactly as presented in the lecture. Keep the content structured, concise, and aligned with the lecture flow.
