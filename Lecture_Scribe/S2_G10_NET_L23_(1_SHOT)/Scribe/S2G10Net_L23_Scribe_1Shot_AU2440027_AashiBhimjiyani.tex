@@ -1,0 +1,474 @@
+
+
+
+
+L23_Amazone Sale_2026_Case Study_Coding Session.pdf
+PDF
+Example Lecture Scribe (structure only):
+
+Topic: Random Variables and Expectations
+
+Definition
+A random variable maps outcomes of an experiment to real numbers.
+Key Formula
+Expectation:
+��
+[
+��
+]
+=
+∑
+��
+⋅
+��
+(
+��
+=
+��
+)
+E[X]=∑x⋅P(X=x)
+Explanation
+Expectation represents the average outcome over many trials.
+Worked Example
+If 
+��
+X takes values {1,2,3} with probabilities {0.2, 0.5, 0.3}:
+��
+[
+��
+]
+=
+1
+(
+0.2
+)
++
+2
+(
+0.5
+)
++
+3
+(
+0.3
+)
+=
+2.1
+E[X]=1(0.2)+2(0.5)+3(0.3)=2.1
+Insight
+Expectation does not indicate the most likely value, but the long-run average.
+
+Instruction:
+
+Using the same structure, generate a lecture scribe for the provided lecture (Amazon Black Friday Sale 2026 case study on tail bounds and system reliability). The scribe should function as exam reference material and include all key definitions, formulas (Markov, Chebyshev, Chernoff), derivations, comparisons, and worked examples exactly as presented in the lecture. Keep the content structured, concise, and aligned with the lecture flow.
+
+Here is your lecture scribe following the exact structure and aligned with the provided lecture 
+
+:
+
+Topic: Tail Bounds and System Reliability (Amazon Black Friday Sale 2026 Case Study)
+Definition
+Tail probability refers to the probability that a random variable deviates significantly from its mean:
+
+P
+(
+X
+≥
+k
+)
+P(X≥k)
+In system reliability, this represents the chance of extreme events (traffic spikes) that may cause system failure (SLA breach).
+
+Key Formulas
+1. Markov’s Inequality
+P
+(
+X
+≥
+a
+)
+≤
+E
+[
+X
+]
+a
+P(X≥a)≤ 
+a
+E[X]
+​
+ 
+2. Chebyshev’s Inequality
+P
+(
+∣
+X
+−
+μ
+∣
+≥
+a
+)
+≤
+σ
+2
+a
+2
+P(∣X−μ∣≥a)≤ 
+a 
+2
+ 
+σ 
+2
+ 
+​
+ 
+3. Chernoff Bound
+P
+(
+X
+≥
+a
+)
+≤
+min
+⁡
+t
+>
+0
+e
+−
+t
+a
+M
+X
+(
+t
+)
+P(X≥a)≤ 
+t>0
+min
+​
+ e 
+−ta
+ M 
+X
+​
+ (t)
+where:
+
+M
+X
+(
+t
+)
+=
+E
+[
+e
+t
+X
+]
+M 
+X
+​
+ (t)=E[e 
+tX
+ ]
+Explanation
+Real-world systems (like Amazon servers) experience random traffic, often modeled using Poisson distribution 
+
+ (page 3).
+
+The mean load may appear safe, but rare spikes (tail events) can cause catastrophic failures (page 5: “The mean is safe. The tail is catastrophic.”).
+
+Exact probabilities are hard to compute → we use upper bounds:
+
+Markov → uses only mean
+
+Chebyshev → uses mean + variance
+
+Chernoff → uses full distribution (MGF)
+
+Derivations
+Markov Inequality
+From non-negative random variable:
+
+E
+[
+X
+]
+≥
+a
+⋅
+P
+(
+X
+≥
+a
+)
+⇒
+P
+(
+X
+≥
+a
+)
+≤
+E
+[
+X
+]
+a
+E[X]≥a⋅P(X≥a)⇒P(X≥a)≤ 
+a
+E[X]
+​
+ 
+Chebyshev Inequality
+Using variance:
+
+V
+a
+r
+(
+X
+)
+=
+E
+[
+(
+X
+−
+μ
+)
+2
+]
+Var(X)=E[(X−μ) 
+2
+ ]
+Apply Markov on 
+(
+X
+−
+μ
+)
+2
+(X−μ) 
+2
+ :
+
+P
+(
+∣
+X
+−
+μ
+∣
+≥
+a
+)
+≤
+V
+a
+r
+(
+X
+)
+a
+2
+P(∣X−μ∣≥a)≤ 
+a 
+2
+ 
+Var(X)
+​
+ 
+Chernoff Bound
+Using exponential transformation:
+
+P
+(
+X
+≥
+a
+)
+=
+P
+(
+e
+t
+X
+≥
+e
+t
+a
+)
+P(X≥a)=P(e 
+tX
+ ≥e 
+ta
+ )
+Apply Markov:
+
+P
+(
+X
+≥
+a
+)
+≤
+E
+[
+e
+t
+X
+]
+e
+t
+a
+=
+e
+−
+t
+a
+M
+X
+(
+t
+)
+P(X≥a)≤ 
+e 
+ta
+ 
+E[e 
+tX
+ ]
+​
+ =e 
+−ta
+ M 
+X
+​
+ (t)
+Optimize over 
+t
+t for tightest bound.
+
+Worked Example (Amazon Case Study)
+Scenario
+Traffic follows: Poisson(
+λ
+=
+500
+λ=500) 
+
+ (page 11)
+
+SLA failure threshold: 
+k
+=
+600
+k=600
+
+Goal: Compute 
+P
+(
+X
+≥
+600
+)
+P(X≥600)
+
+Results (from lecture visualization) 
+
+ (page 12)
+Exact Probability ≈ 1.4%
+
+Markov Bound ≈ 90.9%
+
+Chebyshev Bound ≈ 20%
+
+Chernoff Bound ≈ 8.8%
+
+Interpretation
+Markov → extremely loose (overestimates risk)
+
+Chebyshev → better but still loose
+
+Chernoff → closest to reality
+
+Comparison
+Method	Requires	Decay Rate	Tightness	Use Case
+Markov	Mean (
+μ
+μ)	
+1
+/
+k
+1/k (Linear)	Very Loose	Quick rough estimate
+Chebyshev	Mean + Variance	
+1
+/
+k
+2
+1/k 
+2
+  (Polynomial)	Moderate	When variance known
+Chernoff	Full MGF	
+e
+−
+k
+e 
+−k
+  (Exponential)	Tight	Real system design
+(From decision matrix, page 16 
+
+)
+
+Insight
+Better inputs → tighter bounds (page 6):
+
+Mean → weak prediction
+
+Variance → better
+
+Full distribution → best
+
+Engineering impact:
+
+Overestimating probability ⇒ over-provisioning servers
+
+Waste multiplier:
+
+Waste
+=
+Bound Estimate
+Exact Probability
+Waste= 
+Exact Probability
+Bound Estimate
+​
+ 
+Example (page 13):
+
+Markov → ~107,000× waste
+
+Chebyshev → ~6,422× waste
+
+Chernoff → ~10.7× waste
+
+Final Takeaway
+The goal is not exact probability, but safe and tight upper bounds.
+
+Markov is safest but wasteful, Chernoff is precise but requires more information.
+
+In high-stakes systems (like Black Friday), tight bounds directly save millions in infrastructure costs.
+
+If you want, I can convert this into perfect PPT slides format or exam cheat sheet (1-page revision).
+
+
+
+
+
+
