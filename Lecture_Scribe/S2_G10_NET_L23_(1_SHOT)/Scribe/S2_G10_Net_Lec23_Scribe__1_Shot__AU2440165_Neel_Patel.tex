@@ -1,0 +1,244 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath, amssymb}
+\usepackage{geometry}
+\geometry{margin=1in}
+
+\title{Lecture 23: Predicting the Impossible: Tail Bounds and System Reliability}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{Context}
+This lecture analyzes system reliability under uncertainty using probability tail bounds, motivated by the Amazon Black Friday Sale 2026 scenario \textit{(see pages 2--3)} \cite{lecture}.
+
+\section*{Model Setup}
+
+\subsection*{Definition (Random Variable)}
+Let $X$ denote the number of requests (or jobs) arriving in a system within a fixed time interval.
+
+\subsection*{Assumption (Poisson Model)}
+From the datacenter model \textit{(page 3)}, arrivals follow a Poisson process:
+\[
+X \sim \text{Poisson}(\lambda)
+\]
+
+\subsection*{Objective}
+Compute or bound:
+\[
+P(X \ge k)
+\]
+where $k$ is a failure threshold.
+
+\section*{Observation}
+From simulation \textit{(page 5)}:
+\begin{itemize}
+    \item Mean traffic is stable.
+    \item Rare tail events ($X \ge k$) cause system failure.
+\end{itemize}
+
+\section*{Hierarchy of Bounds}
+
+\subsection*{Insight}
+From \textit{page 6}: tighter bounds require more information:
+\begin{itemize}
+    \item Level 1: Mean $\mu$
+    \item Level 2: Variance $\sigma^2$
+    \item Level 3: Full distribution (MGF)
+\end{itemize}
+
+\section*{Markov's Inequality}
+
+\subsection*{Definition}
+For a non-negative random variable $X$:
+\[
+P(X \ge a) \le \frac{\mathbb{E}[X]}{a}
+\]
+
+\subsection*{Requirement}
+Only the mean $\mu = \mathbb{E}[X]$.
+
+\subsection*{Property}
+\begin{itemize}
+    \item Decay rate: $1/k$ (linear)
+    \item Loose bound (overestimates probability)
+\end{itemize}
+
+\section*{Chebyshev's Inequality}
+
+\subsection*{Definition}
+For any random variable $X$:
+\[
+P(|X - \mu| \ge a) \le \frac{\mathrm{Var}(X)}{a^2}
+\]
+
+\subsection*{Equivalent Form}
+\[
+P(X \ge a) \le \frac{\sigma^2}{(a - \mu)^2}
+\]
+
+\subsection*{Requirement}
+Mean $\mu$ and variance $\sigma^2$.
+
+\subsection*{Property}
+\begin{itemize}
+    \item Decay rate: $1/k^2$ (polynomial)
+    \item Tighter than Markov
+\end{itemize}
+
+\section*{Chernoff Bound}
+
+\subsection*{Definition}
+For any $t > 0$:
+\[
+P(X \ge a) \le \min_{t>0} e^{-ta} M_X(t)
+\]
+where:
+\[
+M_X(t) = \mathbb{E}[e^{tX}]
+\]
+
+\subsection*{Example Form (Poisson)}
+\[
+P(X \ge a) \le e^{-\lambda(r\ln r - r + 1)}, \quad r = \frac{a}{\lambda}
+\]
+
+\subsection*{Requirement}
+Full moment generating function (MGF).
+
+\subsection*{Property}
+\begin{itemize}
+    \item Decay rate: exponential $e^{-k}$
+    \item Tightest bound
+\end{itemize}
+
+\section*{Comparison of Decay Rates}
+
+From \textit{page 10}:
+\begin{itemize}
+    \item Markov: $1/k$ (linear)
+    \item Chebyshev: $1/k^2$ (polynomial)
+    \item Chernoff: $e^{-k}$ (exponential)
+\end{itemize}
+
+\section*{Case Study: Black Friday SLA Breach}
+
+\subsection*{Given (page 11)}
+\begin{itemize}
+    \item $\lambda = 500$ requests/min
+    \item Threshold $k = 600$
+\end{itemize}
+
+\subsection*{Objective}
+Estimate:
+\[
+P(X \ge 600)
+\]
+
+\section*{Result Comparison (page 12)}
+
+\begin{itemize}
+    \item Exact probability: $\approx 1.4\%$
+    \item Chernoff bound: $\approx 8.8\%$
+    \item Chebyshev bound: $\approx 20\%$
+    \item Markov bound: $\approx 90.9\%$
+\end{itemize}
+
+\section*{Conclusion}
+\begin{itemize}
+    \item Markov significantly overestimates risk.
+    \item Chebyshev improves accuracy.
+    \item Chernoff provides the tightest bound.
+\end{itemize}
+
+\section*{Financial Interpretation}
+
+\subsection*{Definition (Waste Multiplier)}
+\[
+\text{Waste Multiplier} = \frac{\text{Bound Estimate}}{\text{Exact Probability}}
+\]
+
+\subsection*{Observation (page 13)}
+\begin{itemize}
+    \item Markov leads to extreme over-provisioning.
+    \item Chernoff minimizes unnecessary cost.
+\end{itemize}
+
+\section*{Distribution Sensitivity (page 15)}
+
+\begin{itemize}
+    \item For Poisson/Normal: Chernoff performs well.
+    \item For heavy-tailed (Gamma): Chernoff may overestimate.
+\end{itemize}
+
+\section*{Decision Matrix (page 16)}
+
+\begin{itemize}
+    \item Markov:
+    \begin{itemize}
+        \item Input: Mean
+        \item Use: Rough estimates
+    \end{itemize}
+    \item Chebyshev:
+    \begin{itemize}
+        \item Input: Mean + Variance
+        \item Use: Unknown distribution shape
+    \end{itemize}
+    \item Chernoff:
+    \begin{itemize}
+        \item Input: Full MGF
+        \item Use: Precise SLA-critical systems
+    \end{itemize}
+\end{itemize}
+
+\section*{Laplace Distribution Exercise}
+
+\subsection*{Given (page 17)}
+\[
+X \sim \text{Laplace}(\mu, b)
+\]
+\[
+\sigma = b\sqrt{2}
+\]
+
+\subsection*{Objective}
+Compute Chernoff bound for:
+\[
+a = \mu + 3\sigma
+\]
+
+\subsection*{Derivation Steps (page 18)}
+
+\begin{itemize}
+    \item Step 1:
+    \[
+    M_X(t) = \mathbb{E}[e^{tX}]
+    \]
+    \item Step 2:
+    \[
+    P(X \ge a) \le e^{-ta} M_X(t)
+    \]
+    \item Step 3:
+    Optimize over $t$:
+    \[
+    \frac{d}{dt} \left(e^{-ta} M_X(t)\right) = 0
+    \]
+    \item Step 4:
+    Substitute optimal $t$ to obtain final bound.
+\end{itemize}
+
+\section*{Conclusion}
+Tail bounds provide systematic upper bounds on rare event probabilities:
+\begin{itemize}
+    \item Increasing information yields tighter bounds.
+    \item Chernoff bound best approximates true tail behavior.
+\end{itemize}
+
+\bibliographystyle{plain}
+\begin{thebibliography}{1}
+\bibitem{lecture} Lecture Slides: ``Predicting the Impossible: Tail Bounds and System Reliability'' \cite{turn0file0}
+\end{thebibliography}
+
+\end{document}
